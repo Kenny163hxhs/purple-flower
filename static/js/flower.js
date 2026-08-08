@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const garden = document.querySelector(".garden");
 
     if (!flower) {
-        console.error("Flower element not found.");
+        console.error("Flower not found.");
         return;
     }
 
     let currentAnimation = null;
+    let hasBeenClicked = false;
 
     function createWindParticles() {
 
@@ -21,8 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
             particle.className = "wind-particle";
 
             particle.style.position = "absolute";
-            particle.style.left = (45 + Math.random() * 30) + "%";
-            particle.style.top = (20 + Math.random() * 45) + "%";
+            particle.style.left =
+                (45 + Math.random() * 30) + "%";
+
+            particle.style.top =
+                (20 + Math.random() * 45) + "%";
 
             particle.style.width = "4px";
             particle.style.height = "4px";
@@ -38,22 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             garden.appendChild(particle);
 
-            const distance = 100 + Math.random() * 150;
-            const height = -40 - Math.random() * 80;
+            const distance =
+                100 + Math.random() * 150;
+
+            const height =
+                -40 - Math.random() * 80;
 
             particle.animate(
                 [
                     {
                         opacity: 0,
-                        transform: "translate(0, 0) scale(0.4)"
+                        transform:
+                            "translate(0, 0) scale(.4)"
                     },
-
                     {
                         opacity: 1,
                         transform:
-                            `translate(${distance * 0.4}px, ${height * 0.3}px) scale(1)`
+                            `translate(${distance * .4}px, ${height * .3}px) scale(1)`
                     },
-
                     {
                         opacity: 0,
                         transform:
@@ -61,7 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 ],
                 {
-                    duration: 1000 + Math.random() * 500,
+                    duration:
+                        1000 + Math.random() * 500,
+
                     easing: "ease-out"
                 }
             );
@@ -75,14 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function blowFlower() {
 
-        /* Cancel previous movement */
+        /* Stop previous animation */
         if (currentAnimation) {
             currentAnimation.cancel();
         }
 
         /*
-         * Directly animate the flower.
-         * This does NOT depend on CSS .wind.
+         * Start the wind movement ONLY
+         * after the flower has been clicked.
          */
 
         currentAnimation = flower.animate(
@@ -129,7 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
             {
                 duration: 1600,
-                easing: "cubic-bezier(.15,.75,.25,1)",
+
+                easing:
+                    "cubic-bezier(.15,.75,.25,1)",
+
                 fill: "forwards"
             }
         );
@@ -138,41 +149,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /*
-     * MOBILE + DESKTOP
-     *
-     * pointerdown works with:
-     * - touchscreen
-     * - mouse
-     * - stylus
-     */
+    /* =====================================================
+       CLICK / TAP
+    ===================================================== */
 
     flower.addEventListener("pointerdown", (event) => {
 
         event.preventDefault();
+
+        /*
+         * First click activates the flower.
+         * Then the flower moves.
+         */
+
+        hasBeenClicked = true;
 
         blowFlower();
 
     });
 
 
-    /*
-     * Also support normal click.
-     */
-
-    flower.addEventListener("click", (event) => {
-
-        /*
-         * Prevent duplicate triggering on browsers
-         * that fire both pointerdown and click.
-         */
-
-    });
-
-
-    /*
-     * Keyboard support
-     */
+    /* =====================================================
+       KEYBOARD
+    ===================================================== */
 
     flower.setAttribute("role", "button");
 
@@ -193,6 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             event.preventDefault();
 
+            hasBeenClicked = true;
+
             blowFlower();
 
         }
@@ -200,5 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    console.log("Purple flower wind effect loaded.");
+    console.log(
+        "Flower ready. Waiting for first click..."
+    );
+
 });
