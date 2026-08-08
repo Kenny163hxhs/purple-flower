@@ -276,7 +276,7 @@ h1 span {
 .hearts span {
   position: absolute;
   bottom: -40px;
-  color: rgba(255, 91, 141, .22);
+  color: rgba(168, 85, 247, .22);
   animation: floatUp linear infinite;
 }
 
@@ -336,7 +336,7 @@ h1 span {
   height: 260px;
   bottom: 75px;
   border-radius: 50%;
-  background: rgba(255, 105, 151, .18);
+  background: rgba(168, 85, 247, .20);
   filter: blur(50px);
   animation: glow 4s ease-in-out infinite;
 }
@@ -357,7 +357,7 @@ h1 span {
   height: 245px;
   transform: translateX(-50%);
   border-radius: 99px;
-  background: linear-gradient(90deg, #235d3e, #61a56c, #1c5136);
+  background: linear-gradient(90deg, #35105c, #a855f7, #4c1d95);
   transform-origin: bottom;
   animation: growStem 1.5s .35s cubic-bezier(.2,.8,.2,1) both;
 }
@@ -367,7 +367,7 @@ h1 span {
   width: 95px;
   height: 43px;
   bottom: 100px;
-  background: linear-gradient(135deg, #2e7c4f, #74b978);
+  background: linear-gradient(135deg, #4c1d95, #a855f7, #c084fc);
   border-radius: 100% 0 100% 0;
   opacity: 0;
   transform-origin: 0 100%;
@@ -406,8 +406,11 @@ h1 span {
   border-radius: 65% 65% 45% 45%;
   background:
     radial-gradient(circle at 50% 80%, #ffd27c 0 7%, transparent 8%),
-    linear-gradient(145deg, #ff7ea8, #f23878 65%, #b71958);
-  box-shadow: inset 0 8px 20px rgba(255,255,255,.22), 0 7px 20px rgba(0,0,0,.16);
+    linear-gradient(145deg, #e9d5ff, #a855f7 55%, #6b21a8);
+  box-shadow:
+    inset 0 8px 20px rgba(255,255,255,.28),
+    0 0 14px rgba(192,132,252,.55),
+    0 7px 20px rgba(0,0,0,.16);
 }
 
 .p1 { transform: translate(-50%, -90%) rotate(0deg); }
@@ -428,8 +431,8 @@ h1 span {
   transform: translate(-50%, -50%) scale(0);
   border-radius: 50%;
   background:
-    radial-gradient(circle, #ffefaa 0 10%, #e8a72f 11% 20%, #a96516 21% 100%);
-  box-shadow: 0 0 25px rgba(255, 191, 70, .65);
+    radial-gradient(circle, #f3e8ff 0 10%, #d8b4fe 11% 20%, #7e22ce 21% 100%);
+  box-shadow: 0 0 25px rgba(192, 132, 252, .75);
   animation: centerIn .7s 2.8s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
@@ -439,7 +442,7 @@ h1 span {
   width: 5px;
   height: 65px;
   border-radius: 99px;
-  background: #3e7e4d;
+  background: #7e22ce;
   transform-origin: bottom;
   opacity: .7;
 }
@@ -467,7 +470,7 @@ h1 span {
   padding: 10px 17px;
   border: 1px solid rgba(255,255,255,.18);
   border-radius: 999px;
-  color: #ffe9f0;
+  color: #f3e8ff;
   background: rgba(255,255,255,.06);
   text-decoration: none;
   cursor: pointer;
@@ -566,7 +569,49 @@ h1 span {
 
 @media (max-width: 600px) {
   .card { padding: 48px 24px; }
+
+  .flower-page .flower-scene {
+    padding: 5vh 12px 22px;
+  }
+
+  .flower-page .garden {
+    width: min(94vw, 520px);
+    height: min(52vh, 430px);
+    min-height: 300px;
+    transform: scale(.78);
+    margin: -15px 0;
+  }
+
+  .flower-page .intro h1 {
+    font-size: clamp(30px, 10vw, 48px);
+  }
+
+  .flower-page .intro p {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .flower-page .bottom-message p {
+    font-size: 14px;
+  }
+}
   .buttons { gap: 10px; }
   .btn { padding: 14px 20px; }
   .garden { transform: scale(.82); margin: -20px 0; }
+}
+
+@media (max-width: 380px) {
+  .flower-page .garden {
+    transform: scale(.68);
+    margin: -35px 0;
+  }
+
+  .flower-page .flower {
+    width: 205px;
+    height: 365px;
+  }
+
+  .flower-page .bottom-message {
+    padding-bottom: 5px;
+  }
 }
