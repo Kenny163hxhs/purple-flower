@@ -1,3 +1,15 @@
+/* =========================================================
+   PURPLE FLOWER WEBSITE - COMPLETE RESPONSIVE CSS
+   Includes:
+   - Landing page
+   - Purple Yes / No buttons
+   - Mobile portrait optimization
+   - Flower page
+   - Purple glowing flower
+   - Responsive Back button
+   - Desktop / tablet / landscape support
+========================================================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,13 +17,17 @@
 }
 
 :root {
-  --pink: #a855f7;
-  --pink-light: #d8b4fe;
+  --purple: #a855f7;
+  --purple-light: #d8b4fe;
+  --purple-pale: #f3e8ff;
+  --purple-dark: #7e22ce;
+  --purple-deep: #4c1d95;
   --cream: #faf5ff;
   --ink: #291333;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100%;
   font-family: Georgia, "Times New Roman", serif;
@@ -21,18 +37,40 @@ body {
   overflow: hidden;
 }
 
-/* ---------- LANDING PAGE ---------- */
+/* =========================================================
+   LANDING PAGE
+========================================================= */
 
 .landing {
-  min-height: 100vh;
+  position: relative;
+  min-height: 100svh;
+
   display: grid;
   place-items: center;
+
   color: var(--ink);
+
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.88), transparent 30%),
-    radial-gradient(circle at 80% 80%, rgba(192,132,252,.28), transparent 32%),
-    linear-gradient(135deg, #f3e8ff, #faf5ff 45%, #ead7ff);
-  transition: opacity .55s ease, transform .55s ease;
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.88),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(192,132,252,.28),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #f3e8ff,
+      #faf5ff 45%,
+      #ead7ff
+    );
+
+  transition:
+    opacity .55s ease,
+    transform .55s ease;
 }
 
 .landing.leaving {
@@ -40,78 +78,138 @@ body {
   transform: scale(1.05);
 }
 
+/* =========================================================
+   LANDING CARD
+========================================================= */
+
 .card {
   position: relative;
   z-index: 2;
+
   width: min(90%, 620px);
+
   padding: 65px 45px;
+
   text-align: center;
+
   border: 1px solid rgba(255,255,255,.85);
   border-radius: 32px;
+
   background: rgba(255,255,255,.52);
-  box-shadow: 0 25px 80px rgba(109, 40, 217, .18);
+
+  box-shadow:
+    0 25px 80px rgba(109,40,217,.18);
+
   backdrop-filter: blur(18px);
-  animation: cardIn 1s cubic-bezier(.2,.8,.2,1);
+
+  animation:
+    cardIn
+    1s
+    cubic-bezier(.2,.8,.2,1);
 }
 
 .sparkle {
-  color: var(--pink);
+  color: var(--purple);
+
   font-size: 34px;
+
   margin-bottom: 16px;
-  animation: twinkle 2s infinite ease-in-out;
+
+  animation:
+    twinkle
+    2s
+    infinite
+    ease-in-out;
 }
 
 .eyebrow {
   text-transform: uppercase;
+
   letter-spacing: 4px;
-  font: 600 11px/1.5 Arial, sans-serif;
+
+  font:
+    600 11px/1.5
+    Arial,
+    sans-serif;
+
   color: #7e4aa8;
+
   margin-bottom: 18px;
 }
 
 h1 {
   font-size: clamp(42px, 8vw, 70px);
+
   line-height: .95;
+
   font-weight: 500;
+
   letter-spacing: -2px;
 }
 
 h1 span {
-  color: var(--pink);
+  color: var(--purple);
+
   font-style: italic;
 }
 
 .message {
   margin: 24px auto 35px;
+
   max-width: 420px;
+
   color: #6b4a78;
-  font: 15px/1.7 Arial, sans-serif;
+
+  font:
+    15px/1.7
+    Arial,
+    sans-serif;
 }
 
-/* ---------- RESPONSIVE PURPLE BUTTONS ---------- */
+/* =========================================================
+   LANDING BUTTONS
+========================================================= */
 
 .buttons {
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   gap: 18px;
+
   width: 100%;
+
   min-height: 75px;
+
   margin-top: 25px;
+
   position: relative;
 }
 
 .btn {
   position: relative;
+
   border: none;
   outline: none;
+
   min-width: 150px;
+
   padding: 15px 25px;
+
   border-radius: 999px;
+
   cursor: pointer;
-  font: 700 14px Arial, sans-serif;
+
+  font:
+    700 14px
+    Arial,
+    sans-serif;
+
   -webkit-tap-highlight-color: transparent;
+
   touch-action: manipulation;
+
   transition:
     transform .35s ease,
     box-shadow .35s ease,
@@ -121,25 +219,54 @@ h1 span {
 
 .yes {
   color: #fff;
-  background: linear-gradient(135deg, #7e22ce, #a855f7, #c084fc);
+
+  background:
+    linear-gradient(
+      135deg,
+      #7e22ce,
+      #a855f7,
+      #c084fc
+    );
+
   box-shadow:
     0 0 10px rgba(168,85,247,.55),
     0 0 25px rgba(126,34,206,.35),
     0 10px 30px rgba(76,29,149,.28);
-  text-shadow: 0 1px 3px rgba(45,0,75,.4);
+
+  text-shadow:
+    0 1px 3px rgba(45,0,75,.4);
+
   z-index: 2;
 }
 
 .yes::before {
   content: "";
+
   position: absolute;
+
   inset: -3px;
+
   border-radius: inherit;
-  background: linear-gradient(135deg, #7e22ce, #d8b4fe, #7e22ce);
+
+  background:
+    linear-gradient(
+      135deg,
+      #7e22ce,
+      #d8b4fe,
+      #7e22ce
+    );
+
   filter: blur(10px);
+
   opacity: .45;
+
   z-index: -1;
-  animation: purpleButtonGlow 2.5s ease-in-out infinite;
+
+  animation:
+    purpleButtonGlow
+    2.5s
+    ease-in-out
+    infinite;
 }
 
 .yes:hover {
@@ -155,19 +282,31 @@ h1 span {
 
 .no {
   color: #6b3b7d;
-  background: rgba(255,255,255,.68);
-  border: 1px solid rgba(168,85,247,.35);
+
+  background:
+    rgba(255,255,255,.68);
+
+  border:
+    1px solid rgba(168,85,247,.35);
+
   box-shadow:
     inset 0 0 15px rgba(168,85,247,.08),
     0 0 12px rgba(126,34,206,.12);
+
   backdrop-filter: blur(10px);
+
   z-index: 1;
 }
 
 .no:hover {
   color: #fff;
-  background: rgba(126,34,206,.72);
-  border-color: rgba(216,180,254,.8);
+
+  background:
+    rgba(126,34,206,.72);
+
+  border-color:
+    rgba(216,180,254,.8);
+
   box-shadow:
     0 0 15px rgba(168,85,247,.5),
     inset 0 0 15px rgba(192,132,252,.15);
@@ -179,29 +318,959 @@ h1 span {
 
 .hint {
   min-height: 22px;
+
   margin-top: 20px;
+
   text-align: center;
-  font: 12px Arial, sans-serif;
+
+  font:
+    12px
+    Arial,
+    sans-serif;
+
   letter-spacing: .5px;
+
   color: #8b67a0;
-  text-shadow: 0 0 8px rgba(168,85,247,.35);
-  transition: color .3s ease, transform .3s ease;
+
+  text-shadow:
+    0 0 8px rgba(168,85,247,.35);
+
+  transition:
+    color .3s ease,
+    transform .3s ease;
+}
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.hearts {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.hearts span {
+  position: absolute;
+
+  bottom: -40px;
+
+  color:
+    rgba(168,85,247,.22);
+
+  animation:
+    floatUp
+    linear
+    infinite;
+}
+
+/* =========================================================
+   FLOWER PAGE
+========================================================= */
+
+.flower-page {
+  width: 100%;
+
+  min-height: 100svh;
+
+  color: #fff4f7;
+
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(168,85,247,.18),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(126,34,206,.16),
+      transparent 35%
+    ),
+    linear-gradient(
+      #090012 0%,
+      #170b24 60%,
+      #07000f 100%
+    );
+}
+
+.flower-scene {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 100svh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding:
+    max(8vh, 20px)
+    20px
+    max(35px, env(safe-area-inset-bottom));
+}
+
+/* =========================================================
+   FLOWER INTRO
+========================================================= */
+
+.intro {
+  text-align: center;
+
+  z-index: 2;
+
+  animation:
+    fadeDown
+    1.4s
+    ease
+    both;
+}
+
+.intro p {
+  font:
+    11px
+    Arial,
+    sans-serif;
+
+  text-transform: uppercase;
+
+  letter-spacing: 5px;
+
+  color: #d8b4fe;
+
+  margin-bottom: 12px;
+
+  text-shadow:
+    0 0 10px rgba(168,85,247,.55);
+}
+
+.intro h1 {
+  color: #fff;
+
+  font-size:
+    clamp(34px, 7vw, 62px);
+
+  line-height: .95;
+
+  letter-spacing: -1px;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,.65),
+    0 0 25px rgba(192,132,252,.7),
+    0 0 45px rgba(168,85,247,.45);
+}
+
+/* =========================================================
+   GARDEN
+========================================================= */
+
+.garden {
+  position: relative;
+
+  width:
+    min(90vw, 520px);
+
+  height:
+    min(55vh, 460px);
+
+  min-height: 350px;
+
+  display: grid;
+
+  place-items: end center;
+}
+
+/* =========================================================
+   PURPLE GLOW
+========================================================= */
+
+.glow {
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  bottom: 75px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(168,85,247,.20);
+
+  filter:
+    blur(50px);
+
+  animation:
+    glow
+    4s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   FLOWER
+========================================================= */
+
+.flower {
+  position: relative;
+
+  width: 220px;
+  height: 390px;
+
+  transform-origin:
+    50% 100%;
+
+  animation:
+    sway
+    5s
+    3.4s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   STEM
+========================================================= */
+
+.stem {
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 13px;
+  height: 245px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius: 99px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #35105c,
+      #a855f7,
+      #4c1d95
+    );
+
+  transform-origin: bottom;
+
+  box-shadow:
+    0 0 12px rgba(168,85,247,.35);
+
+  animation:
+    growStem
+    1.5s
+    .35s
+    cubic-bezier(.2,.8,.2,1)
+    both;
+}
+
+/* =========================================================
+   LEAVES
+========================================================= */
+
+.leaf {
+  position: absolute;
+
+  width: 95px;
+  height: 43px;
+
+  bottom: 100px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4c1d95,
+      #a855f7,
+      #c084fc
+    );
+
+  border-radius:
+    100% 0 100% 0;
+
+  opacity: 0;
+
+  transform-origin:
+    0 100%;
+
+  box-shadow:
+    0 0 15px rgba(168,85,247,.25);
+}
+
+.leaf-left {
+  left: 52%;
+
+  transform:
+    rotate(160deg)
+    scale(0);
+
+  animation:
+    leafLeft
+    1s
+    1.45s
+    ease-out
+    forwards;
+}
+
+.leaf-right {
+  left: 48%;
+
+  bottom: 155px;
+
+  transform:
+    rotate(25deg)
+    scale(0);
+
+  animation:
+    leafRight
+    1s
+    1.65s
+    ease-out
+    forwards;
+}
+
+/* =========================================================
+   PETALS
+========================================================= */
+
+.petals {
+  position: absolute;
+
+  left: 50%;
+  top: 42px;
+
+  width: 170px;
+  height: 170px;
+
+  transform:
+    translateX(-50%);
+
+  animation:
+    bloom
+    1.6s
+    1.65s
+    cubic-bezier(.17,.84,.24,1.18)
+    both;
+}
+
+.petal {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 70px;
+  height: 115px;
+
+  transform-origin:
+    50% 90%;
+
+  border-radius:
+    65% 65% 45% 45%;
+
+  background:
+    radial-gradient(
+      circle at 50% 80%,
+      #ffd27c 0 7%,
+      transparent 8%
+    ),
+    linear-gradient(
+      145deg,
+      #e9d5ff,
+      #a855f7 55%,
+      #6b21a8
+    );
+
+  box-shadow:
+    inset 0 8px 20px
+    rgba(255,255,255,.28),
+
+    0 0 14px
+    rgba(192,132,252,.55),
+
+    0 0 28px
+    rgba(168,85,247,.25),
+
+    0 7px 20px
+    rgba(0,0,0,.16);
+}
+
+.p1 {
+  transform:
+    translate(-50%, -90%)
+    rotate(0deg);
+}
+
+.p2 {
+  transform:
+    translate(-50%, -90%)
+    rotate(45deg);
+}
+
+.p3 {
+  transform:
+    translate(-50%, -90%)
+    rotate(90deg);
+}
+
+.p4 {
+  transform:
+    translate(-50%, -90%)
+    rotate(135deg);
+}
+
+.p5 {
+  transform:
+    translate(-50%, -90%)
+    rotate(180deg);
+}
+
+.p6 {
+  transform:
+    translate(-50%, -90%)
+    rotate(225deg);
+}
+
+.p7 {
+  transform:
+    translate(-50%, -90%)
+    rotate(270deg);
+}
+
+.p8 {
+  transform:
+    translate(-50%, -90%)
+    rotate(315deg);
+}
+
+/* =========================================================
+   CENTER
+========================================================= */
+
+.center {
+  position: absolute;
+
+  left: 50%;
+  top: 102px;
+
+  width: 58px;
+  height: 58px;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #f3e8ff 0 10%,
+      #d8b4fe 11% 20%,
+      #7e22ce 21% 100%
+    );
+
+  box-shadow:
+    0 0 20px rgba(192,132,252,.9),
+    0 0 45px rgba(168,85,247,.5),
+    0 0 70px rgba(126,34,206,.25);
+
+  animation:
+    centerIn
+    .7s
+    2.8s
+    cubic-bezier(.2,.8,.2,1)
+    forwards;
+}
+
+/* =========================================================
+   GRASS
+========================================================= */
+
+.grass {
+  position: absolute;
+
+  bottom: 5px;
+
+  width: 5px;
+  height: 65px;
+
+  border-radius: 99px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #a855f7,
+      #4c1d95
+    );
+
+  transform-origin: bottom;
+
+  opacity: .7;
+}
+
+.grass-1 {
+  left: 25%;
+  transform: rotate(-25deg);
+}
+
+.grass-2 {
+  right: 25%;
+  transform: rotate(25deg);
+}
+
+.grass-3 {
+  right: 32%;
+
+  height: 45px;
+
+  transform: rotate(12deg);
+}
+
+/* =========================================================
+   BOTTOM MESSAGE
+========================================================= */
+
+.bottom-message {
+  text-align: center;
+
+  z-index: 2;
+
+  animation:
+    fadeUp
+    1.2s
+    3s
+    ease
+    both;
+}
+
+.bottom-message p {
+  margin-bottom: 15px;
+
+  font:
+    italic 16px
+    Georgia,
+    serif;
+
+  color: #ead7ff;
+
+  text-shadow:
+    0 0 10px rgba(168,85,247,.45);
+}
+
+/* =========================================================
+   BUTTONS ON FLOWER PAGE
+========================================================= */
+
+.bottom-message button,
+.bottom-message a {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 82px;
+
+  margin: 4px;
+
+  padding: 10px 17px;
+
+  border:
+    1px solid rgba(255,255,255,.18);
+
+  border-radius: 999px;
+
+  color: #f3e8ff;
+
+  background:
+    rgba(255,255,255,.06);
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  font:
+    12px
+    Arial,
+    sans-serif;
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    .25s ease;
+}
+
+.bottom-message button:hover,
+.bottom-message a:hover {
+  background:
+    rgba(168,85,247,.25);
+
+  border-color:
+    rgba(216,180,254,.65);
+
+  box-shadow:
+    0 0 18px rgba(168,85,247,.35);
+
+  transform:
+    translateY(-2px);
+}
+
+/* =========================================================
+   BACK BUTTON - PURPLE
+========================================================= */
+
+.back-button {
+  display: inline-flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 90px !important;
+
+  padding: 10px 18px !important;
+
+  border:
+    1px solid
+    rgba(216,180,254,.5) !important;
+
+  border-radius: 999px !important;
+
+  color:
+    #f3e8ff !important;
+
+  background:
+    rgba(126,34,206,.18) !important;
+
+  text-decoration: none !important;
+
+  font:
+    600 12px
+    Arial,
+    sans-serif !important;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 10px
+    rgba(168,85,247,.3),
+
+    0 0 25px
+    rgba(126,34,206,.15),
+
+    inset 0 0 10px
+    rgba(192,132,252,.08);
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.back-button:hover {
+  color: #fff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(126,34,206,.55),
+      rgba(168,85,247,.45)
+    ) !important;
+
+  border-color:
+    rgba(233,213,255,.9) !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(216,180,254,.8),
+
+    0 0 30px
+    rgba(168,85,247,.6),
+
+    0 0 50px
+    rgba(126,34,206,.3);
+
+  transform:
+    translateY(-2px);
+}
+
+.back-button:active {
+  transform:
+    scale(.94);
+}
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.stars {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.stars i {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,.8);
+
+  box-shadow:
+    0 0 8px
+    rgba(216,180,254,.8);
+
+  animation:
+    twinkle
+    3s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform:
+      translateY(30px)
+      scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes floatUp {
+  from {
+    transform:
+      translateY(0)
+      rotate(0);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translateY(-110vh)
+      rotate(180deg);
+
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: .35;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes purpleButtonGlow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: .35;
     transform: scale(.98);
   }
+
   50% {
     opacity: .7;
     transform: scale(1.03);
   }
 }
 
-/* ---------- RESPONSIVE BUTTONS ---------- */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform:
+      translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform:
+      translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    transform:
+      scale(.9);
+
+    opacity: .55;
+  }
+
+  50% {
+    transform:
+      scale(1.12);
+
+    opacity: 1;
+  }
+}
+
+@keyframes growStem {
+  from {
+    transform:
+      translateX(-50%)
+      scaleY(0);
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      scaleY(1);
+  }
+}
+
+@keyframes leafLeft {
+  to {
+    opacity: 1;
+
+    transform:
+      rotate(160deg)
+      scale(1);
+  }
+}
+
+@keyframes leafRight {
+  to {
+    opacity: 1;
+
+    transform:
+      rotate(25deg)
+      scale(1);
+  }
+}
+
+@keyframes bloom {
+  from {
+    transform:
+      translateX(-50%)
+      scale(.05)
+      rotate(-30deg);
+
+    opacity: 0;
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      scale(1)
+      rotate(0);
+
+    opacity: 1;
+  }
+}
+
+@keyframes centerIn {
+  to {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform:
+      rotate(-1.5deg);
+  }
+
+  50% {
+    transform:
+      rotate(1.5deg);
+  }
+}
+
+@keyframes restartBloom {
+  0% {
+    transform:
+      scale(.2)
+      rotate(-10deg);
+
+    opacity: .1;
+  }
+
+  100% {
+    transform:
+      scale(1)
+      rotate(0);
+
+    opacity: 1;
+  }
+}
+
+.flower.restart {
+  animation:
+    restartBloom
+    3.5s
+    ease
+    both,
+
+    sway
+    5s
+    3.4s
+    ease-in-out
+    infinite;
+}
+
+/* =========================================================
+   LANDING RESPONSIVE - TABLET
+========================================================= */
 
 @media (max-width: 700px) {
+
   .buttons {
     gap: 12px;
     margin-top: 22px;
@@ -209,7 +1278,10 @@ h1 span {
 
   .btn {
     min-width: 135px;
-    padding: 14px 20px;
+
+    padding:
+      14px 20px;
+
     font-size: 13px;
   }
 
@@ -219,23 +1291,63 @@ h1 span {
   }
 }
 
+/* =========================================================
+   LANDING RESPONSIVE - MOBILE
+========================================================= */
+
 @media (max-width: 480px) {
+
+  .landing {
+    min-height: 100svh;
+
+    padding:
+      max(12px, env(safe-area-inset-top))
+      10px
+      max(12px, env(safe-area-inset-bottom));
+  }
+
   .card {
-    width: min(92%, 420px);
-    padding: 45px 20px;
+    width:
+      min(92vw, 420px);
+
+    padding:
+      45px 20px;
+
+    border-radius:
+      26px;
+  }
+
+  h1 {
+    font-size:
+      clamp(36px, 12vw, 52px);
+  }
+
+  .message {
+    font-size: 13px;
+
+    margin:
+      20px auto 25px;
   }
 
   .buttons {
     flex-direction: column;
+
     gap: 12px;
+
     min-height: 125px;
+
     margin-top: 20px;
   }
 
   .btn {
-    width: min(85vw, 280px);
+    width:
+      min(85vw, 280px);
+
     min-width: 0;
-    padding: 14px 20px;
+
+    padding:
+      14px 20px;
+
     font-size: 13px;
   }
 
@@ -245,9 +1357,37 @@ h1 span {
   }
 }
 
+/* =========================================================
+   LANDING - VERY SMALL PHONES
+========================================================= */
+
 @media (max-width: 360px) {
+
   .card {
-    padding: 38px 16px;
+    width: 94vw;
+
+    padding:
+      38px 16px;
+  }
+
+  .sparkle {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  h1 {
+    font-size:
+      clamp(32px, 11vw, 45px);
+  }
+
+  .message {
+    font-size: 12px;
+    line-height: 1.55;
   }
 
   .buttons {
@@ -256,7 +1396,10 @@ h1 span {
 
   .btn {
     width: 85vw;
-    padding: 12px 17px;
+
+    padding:
+      12px 17px;
+
     font-size: 12px;
   }
 
@@ -265,381 +1408,148 @@ h1 span {
   }
 }
 
-
-.hearts {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.hearts span {
-  position: absolute;
-  bottom: -40px;
-  color: rgba(168, 85, 247, .22);
-  animation: floatUp linear infinite;
-}
-
-/* ---------- FLOWER PAGE ---------- */
-
-.flower-page {
-  min-height: 100vh;
-  color: #fff4f7;
-  background:
-    radial-gradient(circle at 50% 55%, rgba(168, 85, 247, .18), transparent 22%),
-    radial-gradient(circle at 50% 80%, rgba(126, 34, 206, .16), transparent 35%),
-    linear-gradient(#090012 0%, #170b24 60%, #07000f 100%);
-}
-
-.flower-scene {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8vh 20px 35px;
-}
-
-.intro {
-  text-align: center;
-  z-index: 2;
-  animation: fadeDown 1.4s ease both;
-}
-
-.intro p {
-  font: 11px Arial, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  color: #d8b4fe;
-  margin-bottom: 12px;
-}
-
-.intro h1 {
-  color: #fff;
-  font-size: clamp(34px, 7vw, 62px);
-  letter-spacing: -1px;
-}
-
-.garden {
-  position: relative;
-  width: min(90vw, 520px);
-  height: min(55vh, 460px);
-  min-height: 350px;
-  display: grid;
-  place-items: end center;
-}
-
-.glow {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  bottom: 75px;
-  border-radius: 50%;
-  background: rgba(168, 85, 247, .20);
-  filter: blur(50px);
-  animation: glow 4s ease-in-out infinite;
-}
-
-.flower {
-  position: relative;
-  width: 220px;
-  height: 390px;
-  transform-origin: 50% 100%;
-  animation: sway 5s 3.4s ease-in-out infinite;
-}
-
-.stem {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 13px;
-  height: 245px;
-  transform: translateX(-50%);
-  border-radius: 99px;
-  background: linear-gradient(90deg, #35105c, #a855f7, #4c1d95);
-  transform-origin: bottom;
-  animation: growStem 1.5s .35s cubic-bezier(.2,.8,.2,1) both;
-}
-
-.leaf {
-  position: absolute;
-  width: 95px;
-  height: 43px;
-  bottom: 100px;
-  background: linear-gradient(135deg, #4c1d95, #a855f7, #c084fc);
-  border-radius: 100% 0 100% 0;
-  opacity: 0;
-  transform-origin: 0 100%;
-}
-
-.leaf-left {
-  left: 52%;
-  transform: rotate(160deg) scale(0);
-  animation: leafLeft 1s 1.45s ease-out forwards;
-}
-
-.leaf-right {
-  left: 48%;
-  bottom: 155px;
-  transform: rotate(25deg) scale(0);
-  animation: leafRight 1s 1.65s ease-out forwards;
-}
-
-.petals {
-  position: absolute;
-  left: 50%;
-  top: 42px;
-  width: 170px;
-  height: 170px;
-  transform: translateX(-50%);
-  animation: bloom 1.6s 1.65s cubic-bezier(.17,.84,.24,1.18) both;
-}
-
-.petal {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 70px;
-  height: 115px;
-  transform-origin: 50% 90%;
-  border-radius: 65% 65% 45% 45%;
-  background:
-    radial-gradient(circle at 50% 80%, #ffd27c 0 7%, transparent 8%),
-    linear-gradient(145deg, #e9d5ff, #a855f7 55%, #6b21a8);
-  box-shadow:
-    inset 0 8px 20px rgba(255,255,255,.28),
-    0 0 14px rgba(192,132,252,.55),
-    0 7px 20px rgba(0,0,0,.16);
-}
-
-.p1 { transform: translate(-50%, -90%) rotate(0deg); }
-.p2 { transform: translate(-50%, -90%) rotate(45deg); }
-.p3 { transform: translate(-50%, -90%) rotate(90deg); }
-.p4 { transform: translate(-50%, -90%) rotate(135deg); }
-.p5 { transform: translate(-50%, -90%) rotate(180deg); }
-.p6 { transform: translate(-50%, -90%) rotate(225deg); }
-.p7 { transform: translate(-50%, -90%) rotate(270deg); }
-.p8 { transform: translate(-50%, -90%) rotate(315deg); }
-
-.center {
-  position: absolute;
-  left: 50%;
-  top: 102px;
-  width: 58px;
-  height: 58px;
-  transform: translate(-50%, -50%) scale(0);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, #f3e8ff 0 10%, #d8b4fe 11% 20%, #7e22ce 21% 100%);
-  box-shadow: 0 0 25px rgba(192, 132, 252, .75);
-  animation: centerIn .7s 2.8s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-.grass {
-  position: absolute;
-  bottom: 5px;
-  width: 5px;
-  height: 65px;
-  border-radius: 99px;
-  background: #7e22ce;
-  transform-origin: bottom;
-  opacity: .7;
-}
-
-.grass-1 { left: 25%; transform: rotate(-25deg); }
-.grass-2 { right: 25%; transform: rotate(25deg); }
-.grass-3 { right: 32%; height: 45px; transform: rotate(12deg); }
-
-.bottom-message {
-  text-align: center;
-  z-index: 2;
-  animation: fadeUp 1.2s 3s ease both;
-}
-
-.bottom-message p {
-  margin-bottom: 15px;
-  font: italic 16px Georgia, serif;
-  color: #ead7ff;
-}
-
-.bottom-message button,
-.bottom-message a {
-  display: inline-block;
-  margin: 4px;
-  padding: 10px 17px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 999px;
-  color: #f3e8ff;
-  background: rgba(255,255,255,.06);
-  text-decoration: none;
-  cursor: pointer;
-  font: 12px Arial, sans-serif;
-  transition: .25s ease;
-}
-
-.bottom-message button:hover,
-.bottom-message a:hover {
-  background: rgba(255,255,255,.14);
-}
-
-.stars {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-}
-
-.stars i {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.8);
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.flower.restart {
-  animation: restartBloom 3.5s ease both, sway 5s 3.4s ease-in-out infinite;
-}
-
-/* ---------- ANIMATIONS ---------- */
-
-@keyframes cardIn {
-  from { opacity: 0; transform: translateY(30px) scale(.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0) rotate(0); opacity: 0; }
-  15% { opacity: 1; }
-  to { transform: translateY(-110vh) rotate(180deg); opacity: 0; }
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: .35; }
-  50% { opacity: 1; }
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes glow {
-  0%, 100% { transform: scale(.9); opacity: .55; }
-  50% { transform: scale(1.12); opacity: 1; }
-}
-
-@keyframes growStem {
-  from { transform: translateX(-50%) scaleY(0); }
-  to { transform: translateX(-50%) scaleY(1); }
-}
-
-@keyframes leafLeft {
-  to { opacity: 1; transform: rotate(160deg) scale(1); }
-}
-
-@keyframes leafRight {
-  to { opacity: 1; transform: rotate(25deg) scale(1); }
-}
-
-@keyframes bloom {
-  from { transform: translateX(-50%) scale(.05) rotate(-30deg); opacity: 0; }
-  to { transform: translateX(-50%) scale(1) rotate(0); opacity: 1; }
-}
-
-@keyframes centerIn {
-  to { transform: translate(-50%, -50%) scale(1); }
-}
-
-@keyframes sway {
-  0%, 100% { transform: rotate(-1.5deg); }
-  50% { transform: rotate(1.5deg); }
-}
-
-@keyframes restartBloom {
-  0% { transform: scale(.2) rotate(-10deg); opacity: .1; }
-  100% { transform: scale(1) rotate(0); opacity: 1; }
-}
-
-
-
 /* =========================================================
-   MOBILE PORTRAIT — FLOWER OPTIMIZED
+   FLOWER PAGE - PORTRAIT MOBILE
+   600px AND BELOW
 ========================================================= */
 
-@media (max-width: 600px) and (orientation: portrait) {
-  html, body {
+@media (max-width: 600px)
+and (orientation: portrait) {
+
+  html,
+  body {
     width: 100%;
     height: 100%;
+
     overflow: hidden;
   }
 
   .flower-page {
     width: 100%;
+
     height: 100svh;
+
     min-height: 100svh;
+
     overflow: hidden;
   }
 
   .flower-scene {
     width: 100%;
+
     height: 100svh;
+
     min-height: 0;
-    padding: max(18px, env(safe-area-inset-top)) 8px max(10px, env(safe-area-inset-bottom));
-    justify-content: space-between;
+
+    padding:
+      max(10px, env(safe-area-inset-top))
+      8px
+      max(8px, env(safe-area-inset-bottom));
+
+    justify-content:
+      space-between;
+
     overflow: hidden;
   }
 
   .intro {
     width: 100%;
+
     flex: 0 0 auto;
   }
 
   .intro p {
-    font-size: clamp(7px, 2.1vw, 9px);
-    letter-spacing: clamp(2px, .9vw, 4px);
+    font-size:
+      clamp(7px, 2.1vw, 9px);
+
+    letter-spacing:
+      clamp(2px, .9vw, 4px);
+
     margin-bottom: 5px;
   }
 
   .intro h1 {
-    font-size: clamp(27px, 9vw, 38px);
+    font-size:
+      clamp(27px, 9vw, 38px);
+
     line-height: .95;
   }
 
-  /* The flower gets most of the available portrait height. */
+  /* Flower gets most of the portrait height. */
+
   .garden {
     position: relative;
+
     width: 100%;
-    height: clamp(300px, 62svh, 540px);
+
+    height:
+      clamp(
+        300px,
+        62svh,
+        540px
+      );
+
     min-height: 0;
-    flex: 1 1 auto;
-    margin: 2px auto 0;
+
+    flex:
+      1 1 auto;
+
+    margin:
+      2px auto 0;
+
     display: grid;
-    place-items: end center;
+
+    place-items:
+      end center;
   }
 
   .flower {
-    width: clamp(190px, 58vw, 270px);
-    height: clamp(335px, 64svh, 520px);
+    width:
+      clamp(
+        190px,
+        58vw,
+        270px
+      );
+
+    height:
+      clamp(
+        335px,
+        64svh,
+        520px
+      );
+
     max-width: none;
     max-height: none;
-    transform-origin: 50% 100%;
+
+    transform-origin:
+      50% 100%;
   }
 
   .stem {
-    width: clamp(10px, 3vw, 14px);
+    width:
+      clamp(
+        10px,
+        3vw,
+        14px
+      );
+
     height: 63%;
   }
 
   .leaf {
-    width: clamp(72px, 24vw, 105px);
-    height: clamp(32px, 10vw, 44px);
+    width:
+      clamp(
+        72px,
+        24vw,
+        105px
+      );
+
+    height:
+      clamp(
+        32px,
+        10vw,
+        44px
+      );
   }
 
   .leaf-left {
@@ -651,57 +1561,162 @@ h1 span {
   }
 
   .petals {
-    width: clamp(145px, 44vw, 205px);
-    height: clamp(145px, 44vw, 205px);
-    top: clamp(15px, 4vw, 28px);
+    width:
+      clamp(
+        145px,
+        44vw,
+        205px
+      );
+
+    height:
+      clamp(
+        145px,
+        44vw,
+        205px
+      );
+
+    top:
+      clamp(
+        15px,
+        4vw,
+        28px
+      );
   }
 
   .petal {
-    width: clamp(58px, 18vw, 78px);
-    height: clamp(95px, 29vw, 125px);
+    width:
+      clamp(
+        58px,
+        18vw,
+        78px
+      );
+
+    height:
+      clamp(
+        95px,
+        29vw,
+        125px
+      );
   }
 
   .center {
-    width: clamp(48px, 14vw, 62px);
-    height: clamp(48px, 14vw, 62px);
-    top: clamp(88px, 27vw, 112px);
+    width:
+      clamp(
+        48px,
+        14vw,
+        62px
+      );
+
+    height:
+      clamp(
+        48px,
+        14vw,
+        62px
+      );
+
+    top:
+      clamp(
+        88px,
+        27vw,
+        112px
+      );
   }
 
   .glow {
-    width: clamp(210px, 62vw, 300px);
-    height: clamp(210px, 62vw, 300px);
+    width:
+      clamp(
+        210px,
+        62vw,
+        300px
+      );
+
+    height:
+      clamp(
+        210px,
+        62vw,
+        300px
+      );
+
     bottom: 10%;
-    filter: blur(40px);
+
+    filter:
+      blur(40px);
   }
 
   .grass {
-    height: clamp(42px, 13vw, 65px);
+    height:
+      clamp(
+        42px,
+        13vw,
+        65px
+      );
   }
 
   .bottom-message {
     width: 100%;
-    flex: 0 0 auto;
+
+    flex:
+      0 0 auto;
+
     padding-bottom: 2px;
   }
 
   .bottom-message p {
-    font-size: clamp(11px, 3.4vw, 14px);
+    font-size:
+      clamp(
+        11px,
+        3.4vw,
+        14px
+      );
+
     margin-bottom: 6px;
   }
 
   .bottom-message button,
   .bottom-message a {
-    padding: 8px 14px;
+    padding:
+      8px 14px;
+
     margin: 2px;
+
     font-size: 10px;
+  }
+
+  /* Back button specifically */
+
+  .back-button {
+    min-width:
+      78px !important;
+
+    padding:
+      8px 13px !important;
+
+    font-size:
+      10px !important;
   }
 }
 
-/* Short portrait phones: prioritize flower size over spacing. */
-@media (max-width: 600px) and (max-height: 700px) and (orientation: portrait) {
+/* =========================================================
+   SHORT PORTRAIT PHONES
+   320x568 / 360x640
+========================================================= */
+
+@media (max-width: 600px)
+and (max-height: 700px)
+and (orientation: portrait) {
+
   .flower-scene {
-    padding-top: max(10px, env(safe-area-inset-top));
-    padding-bottom: max(7px, env(safe-area-inset-bottom));
+    padding-top:
+      max(
+        7px,
+        env(safe-area-inset-top)
+      );
+
+    padding-bottom:
+      max(
+        6px,
+        env(safe-area-inset-bottom)
+      );
   }
 
   .intro p {
@@ -709,7 +1724,12 @@ h1 span {
   }
 
   .intro h1 {
-    font-size: clamp(24px, 8vw, 31px);
+    font-size:
+      clamp(
+        24px,
+        8vw,
+        31px
+      );
   }
 
   .garden {
@@ -717,24 +1737,74 @@ h1 span {
   }
 
   .flower {
-    width: clamp(180px, 61vw, 245px);
-    height: clamp(315px, 64svh, 390px);
+    width:
+      clamp(
+        180px,
+        61vw,
+        245px
+      );
+
+    height:
+      clamp(
+        315px,
+        64svh,
+        390px
+      );
   }
 
   .petals {
-    width: clamp(140px, 43vw, 175px);
-    height: clamp(140px, 43vw, 175px);
+    width:
+      clamp(
+        140px,
+        43vw,
+        175px
+      );
+
+    height:
+      clamp(
+        140px,
+        43vw,
+        175px
+      );
   }
 
   .petal {
-    width: clamp(56px, 17vw, 70px);
-    height: clamp(90px, 27vw, 112px);
+    width:
+      clamp(
+        56px,
+        17vw,
+        70px
+      );
+
+    height:
+      clamp(
+        90px,
+        27vw,
+        112px
+      );
   }
 
   .center {
-    width: clamp(46px, 13vw, 56px);
-    height: clamp(46px, 13vw, 56px);
-    top: clamp(84px, 25vw, 98px);
+    width:
+      clamp(
+        46px,
+        13vw,
+        56px
+      );
+
+    height:
+      clamp(
+        46px,
+        13vw,
+        56px
+      );
+
+    top:
+      clamp(
+        84px,
+        25vw,
+        98px
+      );
   }
 
   .bottom-message p {
@@ -744,13 +1814,31 @@ h1 span {
 
   .bottom-message button,
   .bottom-message a {
-    padding: 6px 11px;
+    padding:
+      6px 11px;
+
     font-size: 9px;
+  }
+
+  .back-button {
+    min-width:
+      72px !important;
+
+    padding:
+      6px 11px !important;
+
+    font-size:
+      9px !important;
   }
 }
 
-/* Very narrow phones: make the flower wide enough to look substantial. */
-@media (max-width: 360px) and (orientation: portrait) {
+/* =========================================================
+   VERY NARROW PHONES
+========================================================= */
+
+@media (max-width: 360px)
+and (orientation: portrait) {
+
   .flower {
     width: 64vw;
     height: 63svh;
@@ -771,33 +1859,123 @@ h1 span {
   }
 }
 
-/* Tall phones: use extra height instead of making the flower tiny. */
-@media (min-width: 381px) and (max-width: 600px) and (min-height: 750px) and (orientation: portrait) {
+/* =========================================================
+   TALL PORTRAIT PHONES
+   390x844 / 412x915 / 430x932
+========================================================= */
+
+@media (min-width: 381px)
+and (max-width: 600px)
+and (min-height: 750px)
+and (orientation: portrait) {
+
   .garden {
     height: 66svh;
   }
 
   .flower {
-    width: clamp(205px, 60vw, 285px);
-    height: clamp(360px, 68svh, 560px);
+    width:
+      clamp(
+        205px,
+        60vw,
+        285px
+      );
+
+    height:
+      clamp(
+        360px,
+        68svh,
+        560px
+      );
+  }
+
+  .back-button {
+    min-width:
+      82px !important;
+
+    padding:
+      8px 14px !important;
+
+    font-size:
+      10px !important;
   }
 }
 
-/* Landscape phones */
-@media (max-height: 550px) and (orientation: landscape) {
+/* =========================================================
+   VERY TALL PHONES
+========================================================= */
+
+@media (min-width: 381px)
+and (max-width: 600px)
+and (min-height: 900px)
+and (orientation: portrait) {
+
+  .flower {
+    width:
+      clamp(
+        215px,
+        62vw,
+        295px
+      );
+
+    height:
+      clamp(
+        380px,
+        70svh,
+        580px
+      );
+  }
+}
+
+/* =========================================================
+   TABLETS
+========================================================= */
+
+@media (min-width: 601px)
+and (max-width: 900px) {
+
+  .flower {
+    transform:
+      scale(.92);
+  }
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 901px) {
+
+  .flower {
+    transform:
+      scale(1.08);
+  }
+}
+
+/* =========================================================
+   LANDSCAPE PHONES
+========================================================= */
+
+@media (max-height: 550px)
+and (orientation: landscape) {
+
   .flower-page,
   .flower-scene {
     height: 100svh;
+
     min-height: 0;
+
     overflow: hidden;
   }
 
   .flower-scene {
-    padding: 8px 18px;
+    padding:
+      8px 18px;
   }
 
   .intro p {
     font-size: 7px;
+
     margin-bottom: 2px;
   }
 
@@ -807,7 +1985,9 @@ h1 span {
 
   .garden {
     width: 60vw;
+
     height: 67svh;
+
     min-height: 0;
   }
 
@@ -832,7 +2012,58 @@ h1 span {
 
   .bottom-message button,
   .bottom-message a {
-    padding: 6px 12px;
+    padding:
+      6px 12px;
+
     font-size: 9px;
+  }
+
+  .back-button {
+    min-width:
+      70px !important;
+
+    padding:
+      6px 11px !important;
+
+    font-size:
+      9px !important;
+  }
+}
+
+/* =========================================================
+   SAFE AREA SUPPORT
+========================================================= */
+
+@supports (padding: max(0px)) {
+
+  @media (max-width: 600px) {
+
+    .landing {
+      padding-top:
+        max(
+          12px,
+          env(safe-area-inset-top)
+        );
+
+      padding-bottom:
+        max(
+          12px,
+          env(safe-area-inset-bottom)
+        );
+    }
+
+    .flower-scene {
+      padding-top:
+        max(
+          10px,
+          env(safe-area-inset-top)
+        );
+
+      padding-bottom:
+        max(
+          8px,
+          env(safe-area-inset-bottom)
+        );
+    }
   }
 }
