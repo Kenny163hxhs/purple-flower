@@ -1,116 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>3D Purple Flower</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-    <link rel="stylesheet" href="static/css/style.css">
+    <title>Purple Flower</title>
+
+    <link
+        rel="stylesheet"
+        href="static/css/style.css"
+    >
 </head>
 
 <body>
 
     <main class="flower-page">
 
+        <!-- Background particles -->
         <div id="particles"></div>
 
+
+        <!-- Header -->
         <header class="intro">
+
             <p>JUST FOR YOU</p>
-            <h1>Watch it bloom.</h1>
+
+            <h1>
+                Watch it bloom.
+            </h1>
+
         </header>
 
+
+        <!-- Flower Area -->
         <section class="garden">
 
-    <div class="flower" id="flower">
+            <div
+                class="flower"
+                id="flower"
+                aria-label="Purple flower. Tap to blow the flower."
+                role="button"
+                tabindex="0"
+            >
 
-        <div class="stem"></div>
+                <!-- Stem -->
+                <div class="stem"></div>
 
-        <div class="leaves">
-            <div class="leaf leaf-left"></div>
-            <div class="leaf leaf-right"></div>
-            <div class="leaf leaf-left-bottom"></div>
-        </div>
 
-        <div class="flower-head">
+                <!-- Leaves -->
+                <div class="leaves">
 
-            <div class="petals">
+                    <div
+                        class="leaf leaf-left"
+                    ></div>
 
-                <div class="petal p1"></div>
-                <div class="petal p2"></div>
-                <div class="petal p3"></div>
-                <div class="petal p4"></div>
-                <div class="petal p5"></div>
-                <div class="petal p6"></div>
-                <div class="petal p7"></div>
-                <div class="petal p8"></div>
+                    <div
+                        class="leaf leaf-right"
+                    ></div>
+
+                    <div
+                        class="leaf leaf-left-bottom"
+                    ></div>
+
+                </div>
+
+
+                <!-- Flower Head -->
+                <div class="flower-head">
+
+                    <div class="petals">
+
+                        <div class="petal p1"></div>
+
+                        <div class="petal p2"></div>
+
+                        <div class="petal p3"></div>
+
+                        <div class="petal p4"></div>
+
+                        <div class="petal p5"></div>
+
+                        <div class="petal p6"></div>
+
+                        <div class="petal p7"></div>
+
+                        <div class="petal p8"></div>
+
+                    </div>
+
+
+                    <!-- Center -->
+                    <div class="flower-center"></div>
+
+                </div>
 
             </div>
 
-            <div class="flower-center"></div>
 
-        </div>
+            <!-- Tap Hint -->
+            <div class="tap-hint">
 
-    </div>
+                <span>✦</span>
 
-    <div class="tap-hint">
-        <span>✦</span>
-        Tap the flower
-        <span>✦</span>
-    </div>
+                Tap the flower
 
-</section>
+                <span>✦</span>
 
+            </div>
+
+        </section>
+
+
+        <!-- Bottom -->
         <footer class="bottom-message">
-            <p>Some things are worth waiting for.</p>
 
-            <a class="back-button" href="index.html">
+            <p>
+                Some things are worth waiting for.
+            </p>
+
+
+            <a
+                class="back-button"
+                href="index.html"
+            >
                 ← Back
             </a>
+
         </footer>
 
     </main>
 
 
-<script>
-    const particles = document.getElementById("particles");
-
-    if (particles) {
-        for (let i = 0; i < 65; i++) {
-            const particle = document.createElement("span");
-
-            particle.className = "particle";
-
-            particle.style.left =
-                Math.random() * 100 + "%";
-
-            particle.style.animationDuration =
-                (5 + Math.random() * 9) + "s";
-
-            particle.style.animationDelay =
-                (Math.random() * 10) + "s";
-
-            const size =
-                1 + Math.random() * 3;
-
-            particle.style.width =
-                size + "px";
-
-            particle.style.height =
-                size + "px";
-
-            particles.appendChild(particle);
-        }
-    }
-</script>
-
-    <!-- Three.js -->
-
-    
-
-    <!-- Your 3D flower -->
+    <!-- 2D Flower JavaScript -->
     <script src="static/js/flower.js"></script>
 
 </body>
+
 </html>
