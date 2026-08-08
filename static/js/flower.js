@@ -1,130 +1,105 @@
-/* =========================================================
-   PURPLE FLOWER - TAP TO BLOW IN THE WIND
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
+  const flower = document.getElementById("flower");
+  const garden = document.querySelector(".garden");
+  const hint = document.querySelector(".tap-hint");
+  const particles = document.getElementById("particles");
 
-    const flower = document.querySelector(".flower");
-    const garden = document.querySelector(".garden");
+  if (!flower || !garden) {
+    console.error("2D flower elements were not found.");
+    return;
+  }
 
-    if (!flower || !garden) return;
+  function createWindParticles() {
+    for (let i = 0; i < 12; i++) {
+      const particle = document.createElement("span");
+      particle.className = "wind-particle";
 
-    let windTimer = null;
+      particle.style.left = `${42 + Math.random() * 28}%`;
+      particle.style.top = `${20 + Math.random() * 45}%`;
 
-    function createWindParticles() {
+      garden.appendChild(particle);
 
-        for (let i = 0; i < 10; i++) {
+      const distance = 90 + Math.random() * 150;
+      const height = -70 + Math.random() * 100;
 
-            const particle = document.createElement("span");
-
-            particle.className = "wind-particle";
-
-            const startX = 45 + Math.random() * 35;
-            const startY = 20 + Math.random() * 45;
-
-            particle.style.left = `${startX}%`;
-            particle.style.top = `${startY}%`;
-
-            garden.appendChild(particle);
-
-            const distance = 100 + Math.random() * 120;
-            const height = -30 - Math.random() * 80;
-
-            particle.animate(
-                [
-                    {
-                        opacity: 0,
-                        transform:
-                            "translate3d(0, 0, 0) scale(.4)"
-                    },
-
-                    {
-                        opacity: 1,
-                        transform:
-                            `translate3d(${distance * .45}px, ${height * .4}px, 0) scale(1)`
-                    },
-
-                    {
-                        opacity: 0,
-                        transform:
-                            `translate3d(${distance}px, ${height}px, 0) scale(0)`
-                    }
-                ],
-                {
-                    duration: 900 + Math.random() * 500,
-                    delay: Math.random() * 150,
-                    easing: "cubic-bezier(.15,.75,.25,1)",
-                    fill: "forwards"
-                }
-            );
-
-            setTimeout(() => {
-                particle.remove();
-            }, 1600);
+      particle.animate(
+        [
+          {
+            opacity: 0,
+            transform: "translate3d(0,0,0) scale(.3)"
+          },
+          {
+            opacity: 1,
+            transform:
+              `translate3d(${distance * .45}px, ${height * .4}px, 0) scale(1)`
+          },
+          {
+            opacity: 0,
+            transform:
+              `translate3d(${distance}px, ${height}px, 0) scale(0)`
+          }
+        ],
+        {
+          duration: 900 + Math.random() * 600,
+          easing: "cubic-bezier(.15,.75,.25,1)",
+          fill: "forwards"
         }
+      );
+
+      setTimeout(() => particle.remove(), 1700);
+    }
+  }
+
+  function blowFlower() {
+    flower.classList.remove("wind");
+    void flower.offsetWidth;
+    flower.classList.add("wind");
+
+    createWindParticles();
+
+    if (hint) {
+      hint.innerHTML = "<span>✦</span> The wind is blowing... <span>✦</span>";
+
+      clearTimeout(hint._timer);
+
+      hint._timer = setTimeout(() => {
+        hint.innerHTML = "<span>✦</span> Tap the flower <span>✦</span>";
+      }, 1500);
     }
 
+    setTimeout(() => {
+      flower.classList.remove("wind");
+    }, 1750);
+  }
 
-    function blowFlower() {
+  flower.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    blowFlower();
+  }, { passive: false });
 
-        /* Restart the animation even when tapped repeatedly */
-        flower.classList.remove("wind");
-
-        void flower.offsetWidth;
-
-        flower.classList.add("wind");
-
-        createWindParticles();
-
-        clearTimeout(windTimer);
-
-        windTimer = setTimeout(() => {
-            flower.classList.remove("wind");
-        }, 1700);
+  flower.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      blowFlower();
     }
+  });
 
+  // Background particles
+  if (particles) {
+    for (let i = 0; i < 55; i++) {
+      const p = document.createElement("span");
+      p.className = "particle";
+      p.style.left = `${Math.random() * 100}%`;
+      p.style.animationDuration = `${5 + Math.random() * 9}s`;
+      p.style.animationDelay = `${Math.random() * 10}s`;
 
-    /* =====================================================
-       MOBILE + DESKTOP TAP / CLICK
-    ===================================================== */
+      const size = 1 + Math.random() * 3;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
 
-    flower.addEventListener("pointerdown", (event) => {
+      particles.appendChild(p);
+    }
+  }
 
-        event.preventDefault();
-
-        blowFlower();
-
-    });
-
-
-    /* =====================================================
-       ACCESSIBILITY
-    ===================================================== */
-
-    flower.setAttribute("role", "button");
-
-    flower.setAttribute("tabindex", "0");
-
-    flower.setAttribute(
-        "aria-label",
-        "Purple flower. Tap the flower to make it move with the wind."
-    );
-
-
-    /* Keyboard support */
-    flower.addEventListener("keydown", (event) => {
-
-        if (
-            event.key === "Enter" ||
-            event.key === " "
-        ) {
-
-            event.preventDefault();
-
-            blowFlower();
-
-        }
-
-    });
-
+  console.log("Purple 2D flower loaded successfully.");
 });
