@@ -1,42 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const container = document.getElementById("flower3d");
 
     if (!container) {
-        console.error("3D flower container not found.");
+        console.error("3D flower container #flower3d was not found.");
         return;
     }
 
-    /* =====================================================
+    if (typeof THREE === "undefined") {
+        console.error(
+            "Three.js was not loaded. Check the Three.js script."
+        );
+        return;
+    }
+
+    /* =========================================================
        SCENE
-    ===================================================== */
+    ========================================================= */
 
     const scene = new THREE.Scene();
 
 
-    /* =====================================================
+    /* =========================================================
        CAMERA
-    ===================================================== */
+    ========================================================= */
 
     const camera = new THREE.PerspectiveCamera(
-        35,
-        container.clientWidth / container.clientHeight,
+        32,
+        1,
         0.1,
         100
     );
 
-    camera.position.set(0, 1.25, 8.5);
+    camera.position.set(0, 0.8, 9.5);
 
     camera.lookAt(
         0,
-        1.35,
+        0.7,
         0
     );
 
 
-    /* =====================================================
+    /* =========================================================
        RENDERER
-    ===================================================== */
+    ========================================================= */
 
     const renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -45,123 +51,135 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     renderer.setPixelRatio(
-        Math.min(window.devicePixelRatio, 2)
+        Math.min(window.devicePixelRatio || 1, 2)
     );
 
-    renderer.setSize(
-        container.clientWidth,
-        container.clientHeight
-    );
+    renderer.outputColorSpace =
+        THREE.SRGBColorSpace;
 
     renderer.shadowMap.enabled = true;
 
     renderer.shadowMap.type =
         THREE.PCFSoftShadowMap;
 
-    renderer.outputColorSpace =
-        THREE.SRGBColorSpace;
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.display = "block";
+    renderer.domElement.style.touchAction = "none";
 
     container.appendChild(
         renderer.domElement
     );
 
 
-    /* =====================================================
+    /* =========================================================
        LIGHTING
-    ===================================================== */
+    ========================================================= */
 
     const ambientLight =
         new THREE.AmbientLight(
             0xd8b4fe,
-            1.4
+            1.8
         );
 
-    scene.add(ambientLight);
-
-
-    const moonLight =
-        new THREE.DirectionalLight(
-            0xffffff,
-            2.2
-        );
-
-    moonLight.position.set(
-        -3,
-        6,
-        5
+    scene.add(
+        ambientLight
     );
 
-    moonLight.castShadow = true;
 
-    scene.add(moonLight);
+    const mainLight =
+        new THREE.DirectionalLight(
+            0xffffff,
+            3
+        );
+
+    mainLight.position.set(
+        -4,
+        7,
+        6
+    );
+
+    mainLight.castShadow = true;
+
+    scene.add(
+        mainLight
+    );
 
 
     const purpleLight =
         new THREE.PointLight(
             0xa855f7,
-            8,
-            9
+            12,
+            12
         );
 
     purpleLight.position.set(
         0,
-        2.8,
-        1.5
+        3,
+        2
     );
 
-    scene.add(purpleLight);
+    scene.add(
+        purpleLight
+    );
 
 
     const rimLight =
         new THREE.PointLight(
             0xd8b4fe,
-            5,
-            7
+            7,
+            10
         );
 
     rimLight.position.set(
         -3,
         3,
-        -2
+        -3
     );
 
-    scene.add(rimLight);
+    scene.add(
+        rimLight
+    );
 
 
-    /* =====================================================
+    /* =========================================================
        FLOWER GROUP
-    ===================================================== */
+    ========================================================= */
 
     const flower =
         new THREE.Group();
 
-    flower.position.y = -1.7;
+    flower.position.set(
+        0,
+        -1.75,
+        0
+    );
 
-    flower.rotation.y = 0.05;
+    scene.add(
+        flower
+    );
 
-    scene.add(flower);
 
-
-    /* =====================================================
+    /* =========================================================
        MATERIALS
-    ===================================================== */
+    ========================================================= */
 
     const petalMaterial =
         new THREE.MeshPhysicalMaterial({
 
-            color: 0x8b2bd6,
+            color: 0x7b1fc9,
 
-            emissive: 0x3c0866,
+            emissive: 0x350052,
 
-            emissiveIntensity: 0.45,
+            emissiveIntensity: 0.55,
 
-            roughness: 0.28,
+            roughness: 0.25,
 
-            metalness: 0.04,
+            metalness: 0.03,
 
-            clearcoat: 0.7,
+            clearcoat: 0.9,
 
-            clearcoatRoughness: 0.18,
+            clearcoatRoughness: 0.15,
 
             side: THREE.DoubleSide
         });
@@ -170,19 +188,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const petalHighlight =
         new THREE.MeshPhysicalMaterial({
 
-            color: 0xb45cff,
+            color: 0xb85cff,
 
-            emissive: 0x5e1499,
+            emissive: 0x5c0b91,
 
-            emissiveIntensity: 0.55,
+            emissiveIntensity: 0.65,
 
-            roughness: 0.24,
+            roughness: 0.22,
 
-            metalness: 0.03,
+            metalness: 0.02,
 
-            clearcoat: 0.8,
+            clearcoat: 1,
 
-            clearcoatRoughness: 0.12,
+            clearcoatRoughness: 0.1,
 
             side: THREE.DoubleSide
         });
@@ -191,26 +209,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const stemMaterial =
         new THREE.MeshStandardMaterial({
 
-            color: 0x64139e,
+            color: 0x38104d,
 
-            roughness: 0.5,
+            roughness: 0.45,
 
-            metalness: 0.05
+            metalness: 0.08
         });
 
 
     const leafMaterial =
         new THREE.MeshPhysicalMaterial({
 
-            color: 0x6d20a7,
+            color: 0x60168d,
 
-            emissive: 0x21052f,
+            emissive: 0x180025,
 
-            emissiveIntensity: 0.25,
+            emissiveIntensity: 0.3,
 
-            roughness: 0.4,
+            roughness: 0.38,
 
-            clearcoat: 0.35,
+            clearcoat: 0.5,
 
             side: THREE.DoubleSide
         });
@@ -219,88 +237,98 @@ document.addEventListener("DOMContentLoaded", () => {
     const centerMaterial =
         new THREE.MeshPhysicalMaterial({
 
-            color: 0xc084fc,
+            color: 0xe0a3ff,
 
-            emissive: 0x7e22ce,
+            emissive: 0x8b2bd6,
 
-            emissiveIntensity: 1.2,
+            emissiveIntensity: 1.6,
 
-            roughness: 0.22,
+            roughness: 0.18,
 
             clearcoat: 1
         });
 
 
-    /* =====================================================
+    /* =========================================================
        STEM
-    ===================================================== */
-
-    const stemGeometry =
-        new THREE.CylinderGeometry(
-            0.075,
-            0.11,
-            4.5,
-            16
-        );
+    ========================================================= */
 
     const stem =
         new THREE.Mesh(
-            stemGeometry,
+
+            new THREE.CylinderGeometry(
+                0.075,
+                0.12,
+                4.6,
+                20
+            ),
+
             stemMaterial
         );
 
-    stem.position.y = 0.3;
+
+    stem.position.y =
+        0.25;
+
 
     stem.castShadow = true;
 
     stem.receiveShadow = true;
 
-    flower.add(stem);
+
+    flower.add(
+        stem
+    );
 
 
-    /* =====================================================
+    /* =========================================================
        LEAVES
-    ===================================================== */
+    ========================================================= */
 
     function createLeaf(
         side,
         y,
-        rotationZ
+        rotationZ,
+        scale = 1
     ) {
 
-        const leafGroup =
+        const group =
             new THREE.Group();
 
-        leafGroup.position.set(
+
+        group.position.set(
             side * 0.08,
             y,
             0
         );
 
-        leafGroup.rotation.z =
+
+        group.rotation.z =
             rotationZ;
-
-
-        const geometry =
-            new THREE.SphereGeometry(
-                0.65,
-                24,
-                12
-            );
 
 
         const leaf =
             new THREE.Mesh(
-                geometry,
+
+                new THREE.SphereGeometry(
+                    0.7,
+                    28,
+                    18
+                ),
+
                 leafMaterial
             );
 
 
         leaf.scale.set(
-            1.25,
-            0.35,
-            0.12
+            1.3 * scale,
+            0.38 * scale,
+            0.14 * scale
         );
+
+
+        leaf.position.x =
+            side * 0.55;
 
 
         leaf.rotation.z =
@@ -309,38 +337,52 @@ document.addEventListener("DOMContentLoaded", () => {
                 : 0.25;
 
 
-        leaf.position.x =
-            side * 0.52;
-
-
         leaf.castShadow = true;
 
+        leaf.receiveShadow = true;
 
-        leafGroup.add(leaf);
 
-        flower.add(leafGroup);
+        group.add(
+            leaf
+        );
 
-        return leafGroup;
+
+        flower.add(
+            group
+        );
+
+
+        return group;
     }
 
 
     createLeaf(
         -1,
-        -0.15,
-        -0.12
+        -0.25,
+        -0.18,
+        1
     );
 
 
     createLeaf(
         1,
         0.75,
-        0.12
+        0.18,
+        1
     );
 
 
-    /* =====================================================
+    createLeaf(
+        -1,
+        1.15,
+        -0.1,
+        0.72
+    );
+
+
+    /* =========================================================
        PETALS
-    ===================================================== */
+    ========================================================= */
 
     const petalGroups = [];
 
@@ -362,17 +404,14 @@ document.addEventListener("DOMContentLoaded", () => {
             2.38;
 
 
-        const geometry =
-            new THREE.SphereGeometry(
-                0.72,
-                32,
-                20
-            );
-
-
         const petal =
             new THREE.Mesh(
-                geometry,
+
+                new THREE.SphereGeometry(
+                    0.74,
+                    32,
+                    24
+                ),
 
                 index % 2 === 0
                     ? petalMaterial
@@ -380,15 +419,10 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        /*
-         * Stretch the sphere into
-         * a rounded 3D petal.
-         */
-
         petal.scale.set(
             0.72,
-            1.45,
-            0.22
+            1.5,
+            0.25
         );
 
 
@@ -397,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         petal.rotation.x =
-            THREE.MathUtils.degToRad(-5);
+            THREE.MathUtils.degToRad(-7);
 
 
         petal.castShadow = true;
@@ -405,13 +439,19 @@ document.addEventListener("DOMContentLoaded", () => {
         petal.receiveShadow = true;
 
 
-        group.add(petal);
+        group.add(
+            petal
+        );
 
-        flower.add(group);
 
-        petalGroups.push(group);
+        flower.add(
+            group
+        );
 
-        return group;
+
+        petalGroups.push(
+            group
+        );
     }
 
 
@@ -424,20 +464,18 @@ document.addEventListener("DOMContentLoaded", () => {
         i++
     ) {
 
-        const angle =
-            (Math.PI * 2 / petalCount) * i;
-
-
         createPetal(
-            angle,
+
+            (Math.PI * 2 / petalCount) * i,
+
             i
         );
     }
 
 
-    /* =====================================================
+    /* =========================================================
        INNER PETALS
-    ===================================================== */
+    ========================================================= */
 
     for (
         let i = 0;
@@ -446,8 +484,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
 
         const angle =
-            (Math.PI * 2 / 8) * i
-            + Math.PI / 8;
+            (Math.PI * 2 / 8) * i +
+            Math.PI / 8;
 
 
         const group =
@@ -462,25 +500,23 @@ document.addEventListener("DOMContentLoaded", () => {
             2.38;
 
 
-        const geometry =
-            new THREE.SphereGeometry(
-                0.55,
-                28,
-                18
-            );
-
-
         const petal =
             new THREE.Mesh(
-                geometry,
+
+                new THREE.SphereGeometry(
+                    0.57,
+                    28,
+                    20
+                ),
+
                 petalHighlight
             );
 
 
         petal.scale.set(
-            0.62,
-            1.05,
-            0.18
+            0.63,
+            1.08,
+            0.2
         );
 
 
@@ -490,30 +526,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         petal.castShadow = true;
 
-
-        group.add(petal);
-
-        flower.add(group);
-
-        petalGroups.push(group);
-    }
+        petal.receiveShadow = true;
 
 
-    /* =====================================================
-       FLOWER CENTER
-    ===================================================== */
-
-    const centerGeometry =
-        new THREE.SphereGeometry(
-            0.47,
-            32,
-            24
+        group.add(
+            petal
         );
 
 
+        flower.add(
+            group
+        );
+
+
+        petalGroups.push(
+            group
+        );
+    }
+
+
+    /* =========================================================
+       FLOWER CENTER
+    ========================================================= */
+
     const center =
         new THREE.Mesh(
-            centerGeometry,
+
+            new THREE.SphereGeometry(
+                0.48,
+                36,
+                28
+            ),
+
             centerMaterial
         );
 
@@ -525,46 +569,44 @@ document.addEventListener("DOMContentLoaded", () => {
     center.scale.set(
         1,
         1,
-        0.75
+        0.78
     );
 
 
     center.castShadow = true;
 
 
-    flower.add(center);
+    flower.add(
+        center
+    );
 
 
-    /* =====================================================
+    /* =========================================================
        CENTER GLOW
-    ===================================================== */
-
-    const glowMaterial =
-        new THREE.MeshBasicMaterial({
-
-            color: 0xc084fc,
-
-            transparent: true,
-
-            opacity: 0.18,
-
-            blending:
-                THREE.AdditiveBlending,
-
-            side: THREE.DoubleSide
-        });
-
+    ========================================================= */
 
     const glow =
         new THREE.Mesh(
 
             new THREE.SphereGeometry(
-                0.85,
-                24,
-                16
+                0.9,
+                32,
+                20
             ),
 
-            glowMaterial
+            new THREE.MeshBasicMaterial({
+
+                color: 0xc084fc,
+
+                transparent: true,
+
+                opacity: 0.2,
+
+                blending:
+                    THREE.AdditiveBlending,
+
+                depthWrite: false
+            })
         );
 
 
@@ -572,18 +614,20 @@ document.addEventListener("DOMContentLoaded", () => {
         2.38;
 
 
-    flower.add(glow);
+    flower.add(
+        glow
+    );
 
 
-    /* =====================================================
-       GROUND PURPLE GLOW
-    ===================================================== */
+    /* =========================================================
+       GROUND GLOW
+    ========================================================= */
 
     const groundGlow =
         new THREE.Mesh(
 
             new THREE.CircleGeometry(
-                1.8,
+                2,
                 64
             ),
 
@@ -593,7 +637,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 transparent: true,
 
-                opacity: 0.12,
+                opacity: 0.14,
 
                 blending:
                     THREE.AdditiveBlending,
@@ -607,12 +651,11 @@ document.addEventListener("DOMContentLoaded", () => {
         -Math.PI / 2;
 
 
-    groundGlow.position.y =
-        -2.0;
-
-
-    groundGlow.position.z =
-        -0.1;
+    groundGlow.position.set(
+        0,
+        -2,
+        -0.15
+    );
 
 
     scene.add(
@@ -620,105 +663,35 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    /* =====================================================
-       WIND
-    ===================================================== */
+    /* =========================================================
+       WIND VARIABLES
+    ========================================================= */
 
-    let windAnimation = null;
+    let wind =
+        0;
 
-
-    function blowFlower() {
-
-        if (windAnimation) {
-            windAnimation.cancel();
-        }
+    let windVelocity =
+        0;
 
 
-        /*
-         * The entire 3D flower bends
-         * as if wind is blowing it.
-         */
-
-        windAnimation =
-            flower.animate(
-
-                [
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(0deg) rotateY(0deg)"
-                    },
-
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(-0.07rad) rotateY(-0.10rad)",
-
-                        offset: 0.16
-                    },
-
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(0.11rad) rotateY(0.13rad)",
-
-                        offset: 0.32
-                    },
-
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(-0.14rad) rotateY(-0.16rad)",
-
-                        offset: 0.50
-                    },
-
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(0.10rad) rotateY(0.11rad)",
-
-                        offset: 0.68
-                    },
-
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(-0.04rad) rotateY(-0.05rad)",
-
-                        offset: 0.84
-                    },
-
-                    {
-                        transform:
-                            "translateY(-1.7px) rotateZ(0deg) rotateY(0deg)"
-                    }
-                ],
-
-                {
-                    duration: 1500,
-
-                    easing:
-                        "cubic-bezier(.15,.75,.25,1)",
-
-                    fill: "forwards"
-                }
-            );
-
-
-        createWindParticles();
-    }
-
-
-    /* =====================================================
+    /* =========================================================
        WIND PARTICLES
-    ===================================================== */
+    ========================================================= */
 
     function createWindParticles() {
 
         const group =
             new THREE.Group();
 
-        scene.add(group);
+
+        scene.add(
+            group
+        );
 
 
         for (
             let i = 0;
-            i < 15;
+            i < 18;
             i++
         ) {
 
@@ -729,7 +702,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     transparent: true,
 
-                    opacity: 0.75,
+                    opacity: 0.8,
 
                     blending:
                         THREE.AdditiveBlending
@@ -753,19 +726,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             particle.position.set(
 
+                -0.3 +
+                Math.random() * 0.8,
+
                 -0.1 +
-                Math.random() * 0.6,
+                Math.random() * 3.5,
 
-                1.0 +
-                Math.random() * 2.2,
-
-                Math.random() * 0.7
+                Math.random() * 0.8
             );
 
 
-            particle.userData.velocity =
-                1.2 +
-                Math.random() * 1.8;
+            particle.userData.speed =
+                1.5 +
+                Math.random() * 2.2;
 
 
             group.add(
@@ -788,7 +761,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 particle => {
 
                     particle.position.x +=
-                        particle.userData.velocity *
+                        particle.userData.speed *
                         0.025;
 
 
@@ -796,20 +769,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         Math.sin(
                             elapsed * 5 +
                             particle.position.x
-                        ) * 0.008;
+                        ) * 0.009;
 
 
                     particle.material.opacity =
                         Math.max(
                             0,
-                            0.8 -
+                            0.85 -
                             elapsed * 0.65
                         );
                 }
             );
 
 
-            if (elapsed < 1.5) {
+            if (
+                elapsed < 1.5
+            ) {
 
                 requestAnimationFrame(
                     animateParticles
@@ -819,6 +794,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 scene.remove(
                     group
+                );
+
+                group.traverse(
+                    object => {
+
+                        if (
+                            object.material
+                        ) {
+                            object.material.dispose();
+                        }
+
+                        if (
+                            object.geometry
+                        ) {
+                            object.geometry.dispose();
+                        }
+
+                    }
                 );
             }
         }
@@ -830,79 +823,167 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =====================================================
+    /* =========================================================
+       BLOW FLOWER
+    ========================================================= */
+
+    function blowFlower() {
+
+        /*
+         * Add wind force.
+         */
+        windVelocity +=
+            0.16;
+
+
+        /*
+         * Create glowing wind particles.
+         */
+        createWindParticles();
+
+
+        /*
+         * Change the hint temporarily.
+         */
+        const hint =
+            document.querySelector(
+                ".tap-hint"
+            );
+
+
+        if (hint) {
+
+            hint.innerHTML =
+                "✦ The wind is blowing... ✦";
+
+
+            clearTimeout(
+                hint._timer
+            );
+
+
+            hint._timer =
+                setTimeout(
+                    () => {
+
+                        hint.innerHTML =
+                            "<span>✦</span> Tap the flower <span>✦</span>";
+
+                    },
+                    1400
+                );
+        }
+    }
+
+
+    /* =========================================================
        TAP / CLICK
-    ===================================================== */
+    ========================================================= */
 
     renderer.domElement.addEventListener(
         "pointerdown",
+
         event => {
 
             event.preventDefault();
 
             blowFlower();
+
+        },
+
+        {
+            passive: false
         }
     );
 
 
-    /* =====================================================
+    /* =========================================================
        MOUSE / TOUCH PARALLAX
-    ===================================================== */
+    ========================================================= */
 
-    let targetX = 0;
-    let targetY = 0;
+    let targetX =
+        0;
+
+    let targetY =
+        0;
 
 
     renderer.domElement.addEventListener(
         "pointermove",
+
         event => {
 
             const rect =
-                renderer.domElement.getBoundingClientRect();
+                renderer.domElement
+                    .getBoundingClientRect();
 
 
             const x =
-                (event.clientX - rect.left) /
-                rect.width;
+                (
+                    event.clientX -
+                    rect.left
+                ) /
+                Math.max(
+                    rect.width,
+                    1
+                );
 
 
             const y =
-                (event.clientY - rect.top) /
-                rect.height;
+                (
+                    event.clientY -
+                    rect.top
+                ) /
+                Math.max(
+                    rect.height,
+                    1
+                );
 
 
             targetX =
-                (x - 0.5) * 0.18;
+                (x - 0.5) *
+                0.22;
 
 
             targetY =
-                (y - 0.5) * 0.12;
+                (y - 0.5) *
+                0.15;
+
         }
     );
 
 
     renderer.domElement.addEventListener(
         "pointerleave",
+
         () => {
 
             targetX = 0;
 
             targetY = 0;
+
         }
     );
 
 
-    /* =====================================================
+    /* =========================================================
        RESPONSIVE
-    ===================================================== */
+    ========================================================= */
 
     function resize() {
 
         const width =
-            container.clientWidth;
+            Math.max(
+                container.clientWidth,
+                1
+            );
+
 
         const height =
-            container.clientHeight;
+            Math.max(
+                container.clientHeight,
+                1
+            );
 
 
         camera.aspect =
@@ -912,33 +993,79 @@ document.addEventListener("DOMContentLoaded", () => {
         camera.updateProjectionMatrix();
 
 
-        renderer.setSize(
-            width,
-            height
-        );
-
-
-        renderer.setPixelRatio(
-            Math.min(
-                window.devicePixelRatio,
-                2
-            )
-        );
-
-
+        /*
+         * Portrait phone:
+         * move camera farther away.
+         */
         if (
             width < 600 &&
             height > width
         ) {
 
             camera.position.z =
-                9.2;
+                10.8;
 
-        } else {
+
+            flower.scale.setScalar(
+                0.98
+            );
+
+        }
+
+
+        /*
+         * Tablet / small screen.
+         */
+        else if (
+            width < 900
+        ) {
 
             camera.position.z =
-                8.5;
+                10;
+
+
+            flower.scale.setScalar(
+                1.02
+            );
+
         }
+
+
+        /*
+         * Desktop.
+         */
+        else {
+
+            camera.position.z =
+                9.2;
+
+
+            flower.scale.setScalar(
+                1.08
+            );
+        }
+
+
+        camera.lookAt(
+            0,
+            0.55,
+            0
+        );
+
+
+        renderer.setSize(
+            width,
+            height,
+            false
+        );
+
+
+        renderer.setPixelRatio(
+            Math.min(
+                window.devicePixelRatio || 1,
+                2
+            )
+        );
     }
 
 
@@ -948,12 +1075,26 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
+    window.addEventListener(
+        "orientationchange",
+
+        () => {
+
+            setTimeout(
+                resize,
+                150
+            );
+
+        }
+    );
+
+
     resize();
 
 
-    /* =====================================================
-       ANIMATION LOOP
-    ===================================================== */
+    /* =========================================================
+       ANIMATION
+    ========================================================= */
 
     const clock =
         new THREE.Clock();
@@ -971,24 +1112,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-         * Tiny breathing movement only.
-         * The flower does NOT sway automatically.
+         * Very small natural breathing.
          */
-
         const idle =
             Math.sin(
                 elapsed * 1.2
             ) * 0.012;
 
 
-        flower.position.y =
-            -1.7 + idle;
+        /*
+         * Wind physics.
+         */
+        wind +=
+            windVelocity;
+
+
+        windVelocity *=
+            0.88;
+
+
+        if (
+            Math.abs(
+                windVelocity
+            ) < 0.0005
+        ) {
+
+            windVelocity =
+                0;
+        }
+
+
+        wind *=
+            0.88;
 
 
         /*
-         * Subtle petal depth movement.
+         * Wind bending.
          */
+        const windBend =
+            wind +
+            Math.sin(
+                elapsed * 9
+            ) *
+            Math.abs(
+                wind
+            ) *
+            0.35;
 
+
+        flower.rotation.z =
+            windBend;
+
+
+        /*
+         * 3D parallax.
+         */
+        flower.rotation.y +=
+            (
+                targetX * 0.5 -
+                flower.rotation.y
+            ) *
+            0.035;
+
+
+        flower.rotation.x +=
+            (
+                -targetY * 0.35 -
+                flower.rotation.x
+            ) *
+            0.035;
+
+
+        /*
+         * Keep flower in position.
+         */
+        flower.position.y =
+            -1.75 +
+            idle;
+
+
+        /*
+         * Tiny petal movement.
+         */
         petalGroups.forEach(
             (group, index) => {
 
@@ -996,43 +1201,44 @@ document.addEventListener("DOMContentLoaded", () => {
                     Math.sin(
                         elapsed * 0.8 +
                         index
-                    ) * 0.006;
+                    ) *
+                    0.006;
             }
         );
 
 
         /*
-         * Center glow pulse.
+         * Glowing center.
          */
-
         const pulse =
             1 +
             Math.sin(
                 elapsed * 2.2
-            ) * 0.06;
+            ) *
+            0.07;
 
 
-        glow.scale.set(
-            pulse,
-            pulse,
+        glow.scale.setScalar(
             pulse
         );
 
 
         /*
-         * Mouse/touch 3D parallax.
+         * Ground glow.
          */
+        const groundPulse =
+            1 +
+            Math.sin(
+                elapsed
+            ) *
+            0.05;
 
-        flower.rotation.x +=
-            (-targetY -
-                flower.rotation.x) *
-            0.035;
 
-
-        flower.rotation.y +=
-            (targetX -
-                flower.rotation.y) *
-            0.035;
+        groundGlow.scale.set(
+            groundPulse,
+            groundPulse,
+            1
+        );
 
 
         renderer.render(
@@ -1046,7 +1252,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     console.log(
-        "3D purple flower loaded. Tap the flower to blow it in the wind."
+        "3D Purple Flower loaded successfully."
     );
 
 });
