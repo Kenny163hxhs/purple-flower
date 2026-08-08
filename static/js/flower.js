@@ -1,78 +1,59 @@
+/* =========================================================
+   PURPLE FLOWER - TAP TO BLOW IN THE WIND
+========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    const flower = document.getElementById("flower");
+    const flower = document.querySelector(".flower");
+    const garden = document.querySelector(".garden");
 
-    if (!flower) {
-        console.error("Flower not found.");
-        return;
-    }
+    if (!flower || !garden) return;
 
-    let windTimeout = null;
+    let windTimer = null;
 
     function createWindParticles() {
 
-        const garden = document.querySelector(".garden");
+        for (let i = 0; i < 10; i++) {
 
-        if (!garden) return;
+            const particle = document.createElement("span");
 
-        for (let i = 0; i < 12; i++) {
+            particle.className = "wind-particle";
 
-            const particle =
-                document.createElement("span");
+            const startX = 45 + Math.random() * 35;
+            const startY = 20 + Math.random() * 45;
 
-            particle.className =
-                "wind-particle";
+            particle.style.left = `${startX}%`;
+            particle.style.top = `${startY}%`;
 
-            particle.style.left =
-                (40 + Math.random() * 30) + "%";
+            garden.appendChild(particle);
 
-            particle.style.top =
-                (25 + Math.random() * 40) + "%";
-
-            garden.appendChild(
-                particle
-            );
-
-            const distance =
-                80 + Math.random() * 140;
-
-            const height =
-                -40 + Math.random() * 80;
+            const distance = 100 + Math.random() * 120;
+            const height = -30 - Math.random() * 80;
 
             particle.animate(
                 [
                     {
                         opacity: 0,
                         transform:
-                            "translate(0, 0) scale(.3)"
+                            "translate3d(0, 0, 0) scale(.4)"
                     },
 
                     {
                         opacity: 1,
                         transform:
-                            `translate(
-                                ${distance * .45}px,
-                                ${height * .4}px
-                            ) scale(1)`
+                            `translate3d(${distance * .45}px, ${height * .4}px, 0) scale(1)`
                     },
 
                     {
                         opacity: 0,
                         transform:
-                            `translate(
-                                ${distance}px,
-                                ${height}px
-                            ) scale(0)`
+                            `translate3d(${distance}px, ${height}px, 0) scale(0)`
                     }
                 ],
                 {
-                    duration:
-                        900 +
-                        Math.random() * 500,
-
-                    easing:
-                        "cubic-bezier(.15,.75,.25,1)",
-
+                    duration: 900 + Math.random() * 500,
+                    delay: Math.random() * 150,
+                    easing: "cubic-bezier(.15,.75,.25,1)",
                     fill: "forwards"
                 }
             );
@@ -86,85 +67,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function blowFlower() {
 
-        /* Restart the wind animation */
-
-        flower.classList.remove(
-            "wind"
-        );
+        /* Restart the animation even when tapped repeatedly */
+        flower.classList.remove("wind");
 
         void flower.offsetWidth;
 
-        flower.classList.add(
-            "wind"
-        );
+        flower.classList.add("wind");
 
         createWindParticles();
 
-        clearTimeout(
-            windTimeout
-        );
+        clearTimeout(windTimer);
 
-        windTimeout =
-            setTimeout(() => {
-
-                flower.classList.remove(
-                    "wind"
-                );
-
-            }, 1800);
+        windTimer = setTimeout(() => {
+            flower.classList.remove("wind");
+        }, 1700);
     }
 
 
     /* =====================================================
-       TAP / CLICK
+       MOBILE + DESKTOP TAP / CLICK
     ===================================================== */
 
-    flower.addEventListener(
-        "pointerdown",
-        event => {
+    flower.addEventListener("pointerdown", (event) => {
 
-            event.preventDefault();
+        event.preventDefault();
 
-            blowFlower();
+        blowFlower();
 
-        }
-    );
+    });
 
 
     /* =====================================================
        ACCESSIBILITY
     ===================================================== */
 
-    flower.setAttribute(
-        "role",
-        "button"
-    );
+    flower.setAttribute("role", "button");
+
+    flower.setAttribute("tabindex", "0");
 
     flower.setAttribute(
-        "tabindex",
-        "0"
+        "aria-label",
+        "Purple flower. Tap the flower to make it move with the wind."
     );
 
 
-    flower.addEventListener(
-        "keydown",
-        event => {
+    /* Keyboard support */
+    flower.addEventListener("keydown", (event) => {
 
-            if (
-                event.key === "Enter" ||
-                event.key === " "
-            ) {
+        if (
+            event.key === "Enter" ||
+            event.key === " "
+        ) {
 
-                event.preventDefault();
+            event.preventDefault();
 
-                blowFlower();
-            }
+            blowFlower();
+
         }
-    );
 
-
-    console.log(
-        "2D purple flower loaded."
-    );
+    });
 
 });
