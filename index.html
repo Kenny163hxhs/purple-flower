@@ -1,93 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Surprise</title>
-  <link rel="stylesheet" href="static/css/style.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>A Little Surprise</title>
+
+    <link
+        rel="stylesheet"
+        href="static/css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           MOBILE INDEX OVERRIDE
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body.landing {
+
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                max(15px, env(safe-area-inset-top))
+                max(15px, env(safe-area-inset-right))
+                max(15px, env(safe-area-inset-bottom))
+                max(15px, env(safe-area-inset-left));
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(168, 85, 247, .30),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 15% 80%,
+                    rgba(126, 34, 206, .22),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    160deg,
+                    #050008,
+                    #180826 50%,
+                    #050008
+                );
+
+            color: white;
+
+            font-family:
+                Arial,
+                sans-serif;
+        }
+
+
+        /* =====================================================
+           HEARTS
+        ===================================================== */
+
+        .landing .hearts {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        .landing .hearts span {
+
+            position: absolute;
+
+            bottom: -60px;
+
+            color: #e9d5ff;
+
+            text-shadow:
+                0 0 8px #d8b4fe,
+                0 0 18px #a855f7,
+                0 0 35px rgba(168,85,247,.7);
+
+            animation:
+                floatHeart 8s linear infinite;
+        }
+
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .landing .card {
+
+            position: relative;
+
+            z-index: 5;
+
+            width: min(90vw, 560px);
+
+            padding:
+                50px 40px;
+
+            text-align: center;
+
+            border:
+                1px solid
+                rgba(216,180,254,.28);
+
+            border-radius: 30px;
+
+            background:
+                rgba(10, 2, 20, .78);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            box-shadow:
+
+                0 25px 80px
+                rgba(0,0,0,.55),
+
+                0 0 45px
+                rgba(168,85,247,.25),
+
+                inset 0 1px 0
+                rgba(255,255,255,.08);
+        }
+
+
+        /* =====================================================
+           SPARKLE
+        ===================================================== */
+
+        .landing .sparkle {
+
+            width: 64px;
+            height: 64px;
+
+            margin:
+                0 auto 22px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: #fff;
+
+            font-size: 30px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(192,132,252,.35),
+                    transparent 70%
+                );
+
+            box-shadow:
+                0 0 20px #c084fc,
+                0 0 45px
+                rgba(168,85,247,.45);
+        }
+
+
+        /* =====================================================
+           EYEBROW
+        ===================================================== */
+
+        .landing .eyebrow {
+
+            margin:
+                0 0 12px;
+
+            color:
+                #d8b4fe;
+
+            font-size:
+                11px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                4px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        /* =====================================================
+           TITLE
+        ===================================================== */
+
+        .landing h1 {
+
+            margin: 0;
+
+            color: white;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(38px, 8vw, 68px);
+
+            line-height:
+                .98;
+
+            font-weight:
+                500;
+
+            text-shadow:
+                0 0 10px white,
+                0 0 25px #d8b4fe,
+                0 0 50px #a855f7;
+        }
+
+
+        .landing h1 span {
+
+            color:
+                #d8b4fe;
+
+            text-shadow:
+                0 0 10px #c084fc,
+                0 0 25px #a855f7,
+                0 0 50px rgba(168,85,247,.7);
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .landing .message {
+
+            max-width:
+                420px;
+
+            margin:
+                22px auto 28px;
+
+            color:
+                #eadcff;
+
+            font-size:
+                16px;
+
+            line-height:
+                1.5;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .landing .buttons {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
+
+            width:
+                100%;
+        }
+
+
+        .landing .btn {
+
+            min-width:
+                145px;
+
+            min-height:
+                46px;
+
+            padding:
+                12px 20px;
+
+            border-radius:
+                999px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            cursor:
+                pointer;
+
+            touch-action:
+                manipulation;
+
+            -webkit-tap-highlight-color:
+                transparent;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        /* YES */
+
+        .landing .btn.yes {
+
+            color:
+                white;
+
+            border:
+                1px solid
+                rgba(232,202,255,.75);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #a855f7,
+                    #7e22ce
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(168,85,247,.65);
+        }
+
+
+        /* NO */
+
+        .landing .btn.no {
+
+            color:
+                #eadcff;
+
+            border:
+                1px solid
+                rgba(216,180,254,.4);
+
+            background:
+                rgba(255,255,255,.07);
+        }
+
+
+        /* =====================================================
+           HINT
+        ===================================================== */
+
+        .landing .hint {
+
+            min-height:
+                18px;
+
+            margin:
+                16px 0 0;
+
+            color:
+                rgba(234,220,255,.7);
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                2px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        /* =====================================================
+           MOBILE PORTRAIT
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            body.landing {
+
+                padding:
+                    max(12px, env(safe-area-inset-top))
+                    max(12px, env(safe-area-inset-right))
+                    max(12px, env(safe-area-inset-bottom))
+                    max(12px, env(safe-area-inset-left));
+            }
+
+
+            .landing .card {
+
+                width:
+                    92vw;
+
+                max-width:
+                    430px;
+
+                padding:
+                    30px 18px 25px;
+
+                border-radius:
+                    24px;
+            }
+
+
+            .landing .sparkle {
+
+                width:
+                    50px;
+
+                height:
+                    50px;
+
+                margin-bottom:
+                    15px;
+
+                font-size:
+                    23px;
+            }
+
+
+            .landing .eyebrow {
+
+                font-size:
+                    8px;
+
+                letter-spacing:
+                    2.5px;
+            }
+
+
+            .landing h1 {
+
+                font-size:
+                    clamp(31px, 9vw, 43px);
+
+                line-height:
+                    1;
+            }
+
+
+            .landing .message {
+
+                max-width:
+                    310px;
+
+                margin:
+                    16px auto 22px;
+
+                font-size:
+                    13px;
+
+                line-height:
+                    1.45;
+            }
+
+
+            .landing .buttons {
+
+                flex-direction:
+                    column;
+
+                gap:
+                    10px;
+            }
+
+
+            .landing .btn {
+
+                width:
+                    min(78vw, 280px);
+
+                min-width:
+                    0;
+
+                min-height:
+                    46px;
+
+                font-size:
+                    12px;
+            }
+
+
+            .landing .hint {
+
+                margin-top:
+                    13px;
+
+                font-size:
+                    8px;
+
+                letter-spacing:
+                    1px;
+            }
+        }
+
+
+        /* =====================================================
+           VERY SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .landing .card {
+
+                width:
+                    94vw;
+
+                padding:
+                    24px 14px 20px;
+            }
+
+
+            .landing h1 {
+
+                font-size:
+                    29px;
+            }
+
+
+            .landing .message {
+
+                font-size:
+                    12px;
+            }
+
+
+            .landing .btn {
+
+                width:
+                    82vw;
+
+                min-height:
+                    44px;
+            }
+        }
+
+
+        /* =====================================================
+           HEART ANIMATION
+        ===================================================== */
+
+        @keyframes floatHeart {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg)
+                    scale(.8);
+
+                opacity:
+                    0;
+            }
+
+            15% {
+                opacity:
+                    .8;
+            }
+
+            85% {
+                opacity:
+                    .5;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-115vh)
+                    rotate(20deg)
+                    scale(1.1);
+
+                opacity:
+                    0;
+            }
+        }
+
+    </style>
+
 </head>
+
+
 <body class="landing">
-  <div class="hearts" aria-hidden="true"></div>
 
-  <main class="card">
-    <div class="sparkle">✦</div>
+    <div
+        class="hearts"
+        aria-hidden="true"
+    ></div>
 
-    <p class="eyebrow">A little surprise for you</p>
 
-    <h1>
-      Do you want to<br>
-      <span>proceed?</span>
-    </h1>
+    <main class="card">
 
-    <p class="message">
-      Something beautiful is waiting on the other side.
-    </p>
+        <div class="sparkle">
+            ✦
+        </div>
 
-    <div class="buttons">
-      <button id="yesBtn" class="btn yes">Yes, show me ♡</button>
-      <button id="noBtn" class="btn no">Not yet</button>
-    </div>
 
-    <p id="hint" class="hint">Choose carefully...</p>
-  </main>
+        <p class="eyebrow">
+            A little surprise for you
+        </p>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const hint = document.getElementById("hint");
 
-    let noClicks = 0;
+        <h1>
+            Do you want to<br>
+            <span>proceed?</span>
+        </h1>
 
-    const messages = [
-      "Choose carefully...",
-      "Are you sure?",
-      "The flower is waiting...",
-      "The YES button looks nicer now.",
-      "You know you want to.",
-      "Okay, I'll make YES even bigger.",
-      "There is really only one choice now ♡"
-    ];
 
-    noBtn.addEventListener("click", () => {
-      noClicks++;
+        <p class="message">
+            Something beautiful is waiting on the other side.
+        </p>
 
-      const yesScale = Math.min(1 + noClicks * 0.12, 1.8);
-      const noScale = Math.max(1 - noClicks * 0.13, 0.18);
 
-      yesBtn.style.transform = `scale(${yesScale})`;
-      noBtn.style.transform = `scale(${noScale})`;
-      noBtn.style.opacity = Math.max(1 - noClicks * 0.12, 0.35);
+        <div class="buttons">
 
-      hint.textContent =
-        messages[Math.min(noClicks, messages.length - 1)];
+            <button
+                id="yesBtn"
+                class="btn yes"
+            >
+                Yes, show me ♡
+            </button>
 
-      if (noClicks >= 7) {
-        noBtn.textContent = "Okay...";
-      }
-    });
 
-    yesBtn.addEventListener("click", () => {
-      document.body.classList.add("leaving");
+            <button
+                id="noBtn"
+                class="btn no"
+            >
+                Not yet
+            </button>
 
-      setTimeout(() => {
-        window.location.href = "flower.html";
-      }, 550);
-    });
+        </div>
 
-    // Floating background particles
-    const hearts = document.querySelector(".hearts");
 
-    for (let i = 0; i < 18; i++) {
-      const h = document.createElement("span");
+        <p
+            id="hint"
+            class="hint"
+        >
+            Choose carefully...
+        </p>
 
-      h.textContent = Math.random() > 0.5 ? "♡" : "✦";
-      h.style.left = `${Math.random() * 100}%`;
-      h.style.animationDelay = `${Math.random() * 8}s`;
-      h.style.animationDuration = `${6 + Math.random() * 7}s`;
-      h.style.fontSize = `${10 + Math.random() * 22}px`;
+    </main>
 
-      hearts.appendChild(h);
-    }
-  </script>
+
+    <script>
+
+        const yesBtn =
+            document.getElementById("yesBtn");
+
+        const noBtn =
+            document.getElementById("noBtn");
+
+        const hint =
+            document.getElementById("hint");
+
+
+        let noClicks = 0;
+
+
+        const messages = [
+
+            "Choose carefully...",
+
+            "Are you sure?",
+
+            "The flower is waiting...",
+
+            "The YES button looks nicer now.",
+
+            "You know you want to.",
+
+            "Okay, I'll make YES even bigger.",
+
+            "There is really only one choice now ♡"
+
+        ];
+
+
+        noBtn.addEventListener(
+            "click",
+            () => {
+
+                noClicks++;
+
+                const yesScale =
+                    Math.min(
+                        1 + noClicks * .12,
+                        1.8
+                    );
+
+                const noScale =
+                    Math.max(
+                        1 - noClicks * .13,
+                        .18
+                    );
+
+
+                yesBtn.style.transform =
+                    `scale(${yesScale})`;
+
+                noBtn.style.transform =
+                    `scale(${noScale})`;
+
+                noBtn.style.opacity =
+                    Math.max(
+                        1 - noClicks * .12,
+                        .35
+                    );
+
+
+                hint.textContent =
+                    messages[
+                        Math.min(
+                            noClicks,
+                            messages.length - 1
+                        )
+                    ];
+
+
+                if (noClicks >= 7) {
+
+                    noBtn.textContent =
+                        "Okay...";
+
+                }
+
+            }
+        );
+
+
+        yesBtn.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "flower.html";
+
+            }
+        );
+
+
+        /* Floating hearts */
+
+        const hearts =
+            document.querySelector(".hearts");
+
+
+        for (
+            let i = 0;
+            i < 18;
+            i++
+        ) {
+
+            const h =
+                document.createElement("span");
+
+
+            h.textContent =
+                Math.random() > .5
+                    ? "♡"
+                    : "✦";
+
+
+            h.style.left =
+                `${Math.random() * 100}%`;
+
+
+            h.style.animationDelay =
+                `${Math.random() * 8}s`;
+
+
+            h.style.animationDuration =
+                `${6 + Math.random() * 7}s`;
+
+
+            h.style.fontSize =
+                `${10 + Math.random() * 22}px`;
+
+
+            hearts.appendChild(h);
+
+        }
+
+    </script>
+
 </body>
+
 </html>
