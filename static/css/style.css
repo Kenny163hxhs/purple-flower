@@ -1,195 +1,164 @@
 /* =========================================================
-   INDEX / LANDING PAGE
+   PURPLE FLOWER
+   FULL RESPONSIVE CSS
 ========================================================= */
 
-body.landing {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
     width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: #030006;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================================
+   FLOWER PAGE
+========================================================= */
+
+.flower-page {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
     min-height: 100vh;
     min-height: 100dvh;
-
-    margin: 0;
-    padding:
-        max(16px, env(safe-area-inset-top))
-        max(16px, env(safe-area-inset-right))
-        max(16px, env(safe-area-inset-bottom))
-        max(16px, env(safe-area-inset-left));
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     overflow: hidden;
 
     background:
         radial-gradient(
-            circle at 50% 35%,
-            rgba(168, 85, 247, .25),
+            circle at 50% 55%,
+            rgba(126, 34, 206, .18),
             transparent 30%
         ),
         radial-gradient(
-            circle at 15% 80%,
-            rgba(126, 34, 206, .22),
+            circle at 50% 90%,
+            rgba(168, 85, 247, .15),
             transparent 35%
         ),
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(192, 132, 252, .12),
-            transparent 30%
-        ),
-        linear-gradient(
-            160deg,
-            #050008,
-            #180826 50%,
-            #050008
-        );
+        #020004;
 
-    font-family:
-        Arial,
-        sans-serif;
+    color: white;
 }
 
 
 /* =========================================================
-   FLOATING HEARTS
+   STAR PARTICLES
 ========================================================= */
 
-.landing .hearts {
-    position: fixed;
+#particles {
+    position: absolute;
 
     inset: 0;
+
+    width: 100%;
+    height: 100%;
 
     overflow: hidden;
 
     pointer-events: none;
 
-    z-index: 0;
+    z-index: 1;
 }
 
-.landing .hearts span {
+.particle {
     position: absolute;
 
-    bottom: -60px;
-
-    color: #e9d5ff;
-
-    opacity: 0;
-
-    text-shadow:
-        0 0 8px #d8b4fe,
-        0 0 18px #a855f7,
-        0 0 35px rgba(168, 85, 247, .7);
-
-    animation:
-        landingHearts 8s linear infinite;
-}
-
-
-/* =========================================================
-   MAIN CARD
-========================================================= */
-
-.landing .card {
-    position: relative;
-
-    z-index: 5;
-
-    width: min(90vw, 560px);
-
-    padding:
-        clamp(30px, 7vw, 55px)
-        clamp(20px, 6vw, 48px);
-
-    text-align: center;
-
-    border:
-        1px solid rgba(216, 180, 254, .25);
-
-    border-radius: 30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.08),
-            rgba(126,34,206,.12)
-        );
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    box-shadow:
-        0 20px 70px rgba(0,0,0,.5),
-        0 0 40px rgba(168,85,247,.2),
-        inset 0 1px 0 rgba(255,255,255,.1);
-
-    animation:
-        landingCardIn .8s ease both;
-}
-
-
-/* =========================================================
-   SPARKLE
-========================================================= */
-
-.landing .sparkle {
-    width: 64px;
-    height: 64px;
-
-    margin: 0 auto 22px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
 
     border-radius: 50%;
 
-    color: #f3e8ff;
-
-    font-size: 30px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(192,132,252,.3),
-            transparent 70%
-        );
+    background: #e9d5ff;
 
     box-shadow:
-        0 0 20px rgba(192,132,252,.6),
-        0 0 45px rgba(168,85,247,.3);
+        0 0 5px #c084fc,
+        0 0 12px #a855f7;
 
     animation:
-        landingSparkle 3s ease-in-out infinite;
+        particleFloat linear infinite;
+
+    opacity: 0;
+}
+
+@keyframes particleFloat {
+
+    0% {
+        transform:
+            translateY(110vh)
+            scale(.5);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    80% {
+        opacity: .6;
+    }
+
+    100% {
+        transform:
+            translateY(-20vh)
+            scale(1);
+
+        opacity: 0;
+    }
 }
 
 
 /* =========================================================
-   SMALL TITLE
+   HEADER
 ========================================================= */
 
-.landing .eyebrow {
-    margin-bottom: 12px;
+.intro {
+    position: absolute;
+
+    top: 30px;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 30;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+.intro p {
+    margin-bottom: 8px;
 
     color: #d8b4fe;
 
     font-size: 11px;
 
+    font-weight: 600;
+
+    letter-spacing: 5px;
+
     text-transform: uppercase;
 
-    letter-spacing: 4px;
-
     text-shadow:
-        0 0 10px rgba(192,132,252,.9),
-        0 0 20px rgba(168,85,247,.5);
+        0 0 10px #c084fc,
+        0 0 20px #a855f7;
 }
 
-
-/* =========================================================
-   MAIN TITLE
-========================================================= */
-
-.landing h1 {
-    margin: 0;
-
+.intro h1 {
     color: white;
 
     font-family:
@@ -198,165 +167,535 @@ body.landing {
         serif;
 
     font-size:
-        clamp(38px, 8vw, 68px);
-
-    line-height: .95;
+        clamp(38px, 6vw, 68px);
 
     font-weight: 500;
 
-    text-shadow:
-        0 0 10px rgba(255,255,255,.7),
-        0 0 25px rgba(216,180,254,.8),
-        0 0 50px rgba(168,85,247,.6);
-}
-
-.landing h1 span {
-    color: #d8b4fe;
+    line-height: 1;
 
     text-shadow:
-        0 0 10px #c084fc,
-        0 0 25px #a855f7,
-        0 0 50px rgba(168,85,247,.7);
+        0 0 8px white,
+        0 0 20px #d8b4fe,
+        0 0 40px #a855f7;
 }
 
 
 /* =========================================================
-   MESSAGE
+   GARDEN
 ========================================================= */
 
-.landing .message {
-    max-width: 420px;
+.garden {
+    position: absolute;
 
-    margin:
-        22px auto 28px;
-
-    color: #eadcff;
-
-    font-size:
-        clamp(13px, 2.5vw, 16px);
-
-    line-height: 1.5;
-
-    text-shadow:
-        0 0 12px rgba(168,85,247,.35);
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.landing .buttons {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 14px;
+    inset: 0;
 
     width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 5;
+
+    perspective: 900px;
 }
 
-.landing .btn {
-    min-width: 145px;
 
-    min-height: 46px;
+/* =========================================================
+   STEM
+========================================================= */
 
-    padding: 12px 20px;
+.stem {
+    position: absolute;
 
-    border-radius: 999px;
+    left: 50%;
+    bottom: 13%;
 
-    font-family: Arial, sans-serif;
+    width: 8px;
+    height: 42%;
 
-    font-size: 13px;
+    transform:
+        translateX(-50%);
 
-    font-weight: 600;
+    transform-origin:
+        bottom center;
 
-    cursor: pointer;
+    border-radius:
+        100%;
 
-    touch-action: manipulation;
+    background:
+        linear-gradient(
+            90deg,
+            #39005c,
+            #c026d3 45%,
+            #7e22ce 75%,
+            #24003c
+        );
 
-    -webkit-tap-highlight-color: transparent;
+    box-shadow:
+        0 0 8px rgba(192,38,211,.8),
+        0 0 18px rgba(168,85,247,.45);
+
+    z-index: 12;
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        transform 1.1s
+        cubic-bezier(.2,.8,.2,1);
 }
 
 
-/* YES */
+/* =========================================================
+   LEAVES
+========================================================= */
 
-.landing .btn.yes {
-    color: white;
+.leaves {
+    position: absolute;
 
-    border:
-        1px solid rgba(232,202,255,.75);
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 11;
+}
+
+.leaf {
+    position: absolute;
+
+    width: 85px;
+    height: 38px;
+
+    border-radius:
+        100% 0 100% 0;
 
     background:
         linear-gradient(
             135deg,
-            #a855f7,
-            #7e22ce
+            #d946ef,
+            #a21caf 45%,
+            #4c0568
         );
 
     box-shadow:
-        0 0 15px rgba(168,85,247,.6),
-        0 0 35px rgba(126,34,206,.4);
+        0 0 10px rgba(217,70,239,.4);
+
+    opacity: .9;
+
+    transition:
+        transform 1.1s
+        cubic-bezier(.2,.8,.2,1);
 }
 
-.landing .btn.yes:hover {
+.leaf-left {
+    left: calc(50% - 125px);
+    bottom: 34%;
+
     transform:
-        translateY(-2px)
-        scale(1.03);
-
-    box-shadow:
-        0 0 20px rgba(216,180,254,.9),
-        0 0 45px rgba(168,85,247,.6);
+        rotate(-30deg);
 }
 
+.leaf-right {
+    left: calc(50% + 40px);
+    bottom: 40%;
 
-/* NO */
-
-.landing .btn.no {
-    color: #eadcff;
-
-    border:
-        1px solid rgba(216,180,254,.4);
-
-    background:
-        rgba(255,255,255,.06);
-
-    box-shadow:
-        0 0 15px rgba(168,85,247,.15);
+    transform:
+        rotate(25deg)
+        scaleX(-1);
 }
 
-.landing .btn.no:hover {
-    background:
-        rgba(168,85,247,.18);
+.leaf-left-bottom {
+    left: calc(50% - 145px);
+    bottom: 22%;
 
-    border-color:
-        rgba(216,180,254,.7);
+    transform:
+        rotate(-38deg);
 }
 
 
 /* =========================================================
-   HINT
+   FLOWER HEAD
 ========================================================= */
 
-.landing .hint {
-    min-height: 18px;
+.flower-head {
+    position: absolute;
 
-    margin-top: 18px;
+    left: 50%;
+    bottom: 52%;
+
+    width: 180px;
+    height: 180px;
+
+    transform:
+        translateX(-50%);
+
+    transform-origin:
+        center bottom;
+
+    z-index: 20;
+
+    transition:
+        transform 1.1s
+        cubic-bezier(.2,.8,.2,1);
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
+/* =========================================================
+   PETALS
+========================================================= */
+
+.petals {
+    position: absolute;
+
+    inset: 0;
+
+    transform-origin:
+        center center;
+}
+
+.petal {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 78px;
+    height: 110px;
+
+    margin-left: -39px;
+    margin-top: -55px;
+
+    border-radius:
+        65% 65% 45% 45%;
+
+    background:
+        radial-gradient(
+            ellipse at 45% 25%,
+            #f5d0fe 0%,
+            #e879f9 25%,
+            #c026d3 55%,
+            #86198f 78%,
+            #4a044e 100%
+        );
+
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.2),
+        0 0 15px rgba(217,70,239,.45),
+        0 0 30px rgba(168,85,247,.25);
+
+    transform-origin:
+        50% 100%;
+}
+
+
+/* Individual petals */
+
+.p1 {
+    transform:
+        rotate(0deg)
+        translateY(-45px);
+}
+
+.p2 {
+    transform:
+        rotate(45deg)
+        translateY(-45px);
+}
+
+.p3 {
+    transform:
+        rotate(90deg)
+        translateY(-45px);
+}
+
+.p4 {
+    transform:
+        rotate(135deg)
+        translateY(-45px);
+}
+
+.p5 {
+    transform:
+        rotate(180deg)
+        translateY(-45px);
+}
+
+.p6 {
+    transform:
+        rotate(225deg)
+        translateY(-45px);
+}
+
+.p7 {
+    transform:
+        rotate(270deg)
+        translateY(-45px);
+}
+
+.p8 {
+    transform:
+        rotate(315deg)
+        translateY(-45px);
+}
+
+
+/* =========================================================
+   FLOWER CENTER
+========================================================= */
+
+.flower-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 58px;
+    height: 58px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff7ad,
+            #fde047 30%,
+            #f59e0b 60%,
+            #b45309 100%
+        );
+
+    border:
+        4px solid
+        rgba(255,255,255,.35);
+
+    box-shadow:
+        0 0 10px #fde047,
+        0 0 25px #f59e0b,
+        0 0 50px rgba(245,158,11,.5);
+
+    z-index: 30;
+}
+
+
+/* =========================================================
+   TAP HINT
+========================================================= */
+
+.tap-hint {
+    position: absolute;
+
+    left: 50%;
+    top: 67%;
+
+    transform:
+        translateX(-50%);
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 40;
 
     color:
-        rgba(234,220,255,.65);
+        rgba(216,180,254,.65);
 
-    font-size: 10px;
+    font-size:
+        11px;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        3px;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
+
+    pointer-events: none;
+
+    text-shadow:
+        0 0 10px #a855f7;
+}
+
+.tap-hint span {
+    color: #d8b4fe;
+
+    margin:
+        0 8px;
+
+    text-shadow:
+        0 0 10px #c084fc,
+        0 0 20px #a855f7;
+}
+
+
+/* =========================================================
+   BOTTOM MESSAGE
+========================================================= */
+
+.bottom-message {
+    position: absolute;
+
+    left: 0;
+    bottom: 24px;
+
+    width: 100%;
+
+    z-index: 50;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+.bottom-message p {
+    margin-bottom: 14px;
+
+    color:
+        #eadcff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(13px, 2vw, 17px);
+
+    font-style:
+        italic;
+
+    text-shadow:
+        0 0 8px #c084fc,
+        0 0 20px rgba(168,85,247,.5);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 110px;
+    min-height: 42px;
+
+    padding:
+        10px 20px;
+
+    color:
+        #f3e8ff;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    border:
+        1px solid
+        rgba(216,180,254,.55);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(126,34,206,.18);
+
+    box-shadow:
+        0 0 12px
+        rgba(168,85,247,.35);
+
+    backdrop-filter:
+        blur(8px);
+
+    -webkit-backdrop-filter:
+        blur(8px);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+    pointer-events:
+        auto;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+.back-button:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(168,85,247,.3);
+
+    box-shadow:
+        0 0 20px
+        rgba(192,132,252,.65);
+}
+
+.back-button:active {
+    transform:
+        scale(.95);
+}
+
+
+/* =========================================================
+   WIND ANIMATION
+========================================================= */
+
+.flower-head.wind,
+.stem.wind {
+    animation:
+        flowerWind 1.5s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes flowerWind {
+
+    0% {
+        transform:
+            translateX(-50%)
+            rotate(0deg);
+    }
+
+    15% {
+        transform:
+            translateX(-50%)
+            rotate(10deg);
+    }
+
+    35% {
+        transform:
+            translateX(-50%)
+            rotate(-13deg);
+    }
+
+    55% {
+        transform:
+            translateX(-50%)
+            rotate(8deg);
+    }
+
+    75% {
+        transform:
+            translateX(-50%)
+            rotate(-5deg);
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            rotate(0deg);
+    }
 }
 
 
@@ -364,288 +703,553 @@ body.landing {
    MOBILE PORTRAIT
 ========================================================= */
 
-@media (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 600px) {
 
-    body.landing {
+    html,
+    body {
+
+        width: 100%;
+        min-width: 100%;
+
+        height: 100%;
+        min-height: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        overflow: hidden;
+    }
+
+
+    .flower-page {
+
+        position: fixed;
+
+        inset: 0;
+
+        width: 100vw;
+        max-width: none;
+
+        height: 100vh;
+        height: 100dvh;
+
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        margin: 0;
+        padding: 0;
+
+        border-radius: 0;
+
+        overflow: hidden;
+    }
+
+
+    .garden {
+
+        position: absolute;
+
+        inset: 0;
+
+        width: 100vw;
+        height: 100dvh;
+
+        overflow: hidden;
+    }
+
+
+    #particles {
+
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+
+
+    /* Header */
+
+    .intro {
+
+        top:
+            max(
+                16px,
+                env(safe-area-inset-top)
+            );
+
         padding:
-            max(12px, env(safe-area-inset-top))
-            max(12px, env(safe-area-inset-right))
-            max(12px, env(safe-area-inset-bottom))
-            max(12px, env(safe-area-inset-left));
-    }
-
-    .landing .card {
-
-        width: 92vw;
-
-        max-width: 430px;
-
-        padding:
-            28px 18px 24px;
-
-        border-radius: 24px;
+            0 12px;
     }
 
 
-    .landing .sparkle {
+    .intro p {
 
-        width: 50px;
-        height: 50px;
-
-        margin-bottom: 16px;
-
-        font-size: 24px;
-    }
-
-
-    .landing .eyebrow {
-
-        font-size: 8px;
-
-        letter-spacing: 2.5px;
-
-        margin-bottom: 10px;
-    }
-
-
-    .landing h1 {
+        margin-bottom:
+            7px;
 
         font-size:
-            clamp(32px, 9.5vw, 43px);
+            8px;
 
-        line-height: .98;
-
-        letter-spacing: -1px;
+        letter-spacing:
+            3.5px;
     }
 
 
-    .landing .message {
+    .intro h1 {
 
-        max-width: 320px;
+        font-size:
+            clamp(
+                31px,
+                9.5vw,
+                46px
+            );
+
+        white-space:
+            nowrap;
+    }
+
+
+    /* Flower */
+
+    .flower-head {
+
+        width:
+            clamp(
+                125px,
+                42vw,
+                180px
+            );
+
+        height:
+            clamp(
+                125px,
+                42vw,
+                180px
+            );
+
+        left:
+            50%;
+
+        bottom:
+            27%;
+
+        transform:
+            translateX(-50%)
+            scale(.92);
+    }
+
+
+    .stem {
+
+        width:
+            6px;
+
+        height:
+            40%;
+
+        bottom:
+            11%;
+    }
+
+
+    /* Leaves */
+
+    .leaf {
+
+        width:
+            clamp(
+                58px,
+                22vw,
+                85px
+            );
+
+        height:
+            clamp(
+                27px,
+                10vw,
+                38px
+            );
+    }
+
+
+    .leaf-left {
+
+        left:
+            calc(50% - 105px);
+
+        bottom:
+            31%;
+    }
+
+
+    .leaf-right {
+
+        left:
+            calc(50% + 32px);
+
+        bottom:
+            37%;
+    }
+
+
+    .leaf-left-bottom {
+
+        left:
+            calc(50% - 115px);
+
+        bottom:
+            20%;
+    }
+
+
+    /* Tap */
+
+    .tap-hint {
+
+        top:
+            64%;
+
+        font-size:
+            8px;
+
+        letter-spacing:
+            2px;
+    }
+
+
+    .tap-hint span {
 
         margin:
-            16px auto 22px;
+            0 5px;
+    }
+
+
+    /* Bottom */
+
+    .bottom-message {
+
+        bottom:
+            max(
+                10px,
+                env(safe-area-inset-bottom)
+            );
+
+        padding:
+            0 12px;
+    }
+
+
+    .bottom-message p {
+
+        margin-bottom:
+            9px;
 
         font-size:
-            clamp(12px, 3.5vw, 15px);
-
-        line-height: 1.45;
+            clamp(
+                11px,
+                3.2vw,
+                15px
+            );
     }
 
 
-    /* Stack buttons vertically */
+    .back-button {
 
-    .landing .buttons {
+        min-width:
+            100px;
 
-        flex-direction: column;
+        min-height:
+            40px;
 
-        gap: 10px;
-    }
+        padding:
+            9px 18px;
 
-
-    .landing .btn {
-
-        width: min(78vw, 280px);
-
-        min-width: 0;
-
-        min-height: 46px;
-
-        font-size: 12px;
-    }
-
-
-    .landing .hint {
-
-        margin-top: 14px;
-
-        font-size: 8px;
-
-        letter-spacing: 1.2px;
+        font-size:
+            12px;
     }
 }
 
 
 /* =========================================================
-   SMALL PHONES
+   SMALL PORTRAIT PHONES
 ========================================================= */
 
-@media (max-width: 380px) and (orientation: portrait) {
+@media (max-width: 380px) {
 
-    .landing .card {
+    .intro {
 
-        width: 94vw;
+        top:
+            max(
+                12px,
+                env(safe-area-inset-top)
+            );
+    }
+
+
+    .intro p {
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            3px;
+    }
+
+
+    .intro h1 {
+
+        font-size:
+            29px;
+    }
+
+
+    .flower-head {
+
+        width:
+            130px;
+
+        height:
+            130px;
+
+        bottom:
+            28%;
+
+        transform:
+            translateX(-50%)
+            scale(.85);
+    }
+
+
+    .petal {
+
+        width:
+            58px;
+
+        height:
+            82px;
+
+        margin-left:
+            -29px;
+
+        margin-top:
+            -41px;
+    }
+
+
+    .flower-center {
+
+        width:
+            43px;
+
+        height:
+            43px;
+
+        border-width:
+            3px;
+    }
+
+
+    .stem {
+
+        width:
+            5px;
+
+        height:
+            39%;
+    }
+
+
+    .leaf-left {
+
+        left:
+            calc(50% - 88px);
+    }
+
+
+    .leaf-right {
+
+        left:
+            calc(50% + 28px);
+    }
+
+
+    .leaf-left-bottom {
+
+        left:
+            calc(50% - 96px);
+    }
+
+
+    .tap-hint {
+
+        top:
+            65%;
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            1.5px;
+    }
+
+
+    .bottom-message {
+
+        bottom:
+            7px;
+    }
+
+
+    .bottom-message p {
+
+        font-size:
+            10px;
+
+        margin-bottom:
+            7px;
+    }
+
+
+    .back-button {
+
+        min-width:
+            90px;
+
+        min-height:
+            36px;
 
         padding:
-            23px 14px 20px;
-    }
+            7px 15px;
 
-
-    .landing .sparkle {
-
-        width: 44px;
-        height: 44px;
-
-        margin-bottom: 12px;
-
-        font-size: 20px;
-    }
-
-
-    .landing h1 {
-
-        font-size: 29px;
-    }
-
-
-    .landing .message {
-
-        font-size: 12px;
-
-        margin:
-            13px auto 18px;
-    }
-
-
-    .landing .btn {
-
-        width: 82vw;
-
-        min-height: 44px;
-
-        font-size: 11px;
+        font-size:
+            11px;
     }
 }
 
 
 /* =========================================================
-   LANDSCAPE MOBILE
+   LANDSCAPE PHONES
 ========================================================= */
 
 @media (max-height: 550px) and (orientation: landscape) {
 
-    body.landing {
-        padding: 8px 20px;
+    .intro {
+
+        top:
+            10px;
     }
 
-    .landing .card {
 
-        width: min(88vw, 650px);
+    .intro p {
+
+        font-size:
+            7px;
+
+        letter-spacing:
+            3px;
+
+        margin-bottom:
+            4px;
+    }
+
+
+    .intro h1 {
+
+        font-size:
+            27px;
+    }
+
+
+    .flower-head {
+
+        width:
+            125px;
+
+        height:
+            125px;
+
+        bottom:
+            16%;
+
+        transform:
+            translateX(-50%)
+            scale(.7);
+    }
+
+
+    .stem {
+
+        height:
+            45%;
+
+        bottom:
+            5%;
+    }
+
+
+    .tap-hint {
+
+        top:
+            63%;
+
+        font-size:
+            7px;
+    }
+
+
+    .bottom-message {
+
+        bottom:
+            6px;
+    }
+
+
+    .bottom-message p {
+
+        margin-bottom:
+            5px;
+
+        font-size:
+            10px;
+    }
+
+
+    .back-button {
+
+        min-height:
+            30px;
 
         padding:
-            18px 28px;
-    }
+            5px 15px;
 
-    .landing .sparkle {
-
-        width: 38px;
-        height: 38px;
-
-        margin-bottom: 8px;
-
-        font-size: 18px;
-    }
-
-    .landing h1 {
-
-        font-size: 28px;
-    }
-
-    .landing .message {
-
-        margin:
-            8px auto 12px;
-
-        font-size: 11px;
-    }
-
-    .landing .buttons {
-
-        flex-direction: row;
-    }
-
-    .landing .btn {
-
-        min-height: 38px;
-
-        padding:
-            9px 16px;
-
-        font-size: 10px;
-    }
-
-    .landing .hint {
-
-        margin-top: 7px;
-
-        font-size: 7px;
+        font-size:
+            10px;
     }
 }
 
 
 /* =========================================================
-   ANIMATIONS
+   REDUCED MOTION
 ========================================================= */
 
-@keyframes landingCardIn {
+@media (prefers-reduced-motion: reduce) {
 
-    from {
-        opacity: 0;
+    *,
+    *::before,
+    *::after {
 
-        transform:
-            translateY(25px)
-            scale(.96);
-    }
+        animation-duration:
+            .01ms !important;
 
-    to {
-        opacity: 1;
+        animation-iteration-count:
+            1 !important;
 
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
+        scroll-behavior:
+            auto !important;
 
-@keyframes landingSparkle {
-
-    0%, 100% {
-        transform:
-            scale(1)
-            rotate(0);
-    }
-
-    50% {
-        transform:
-            scale(1.08)
-            rotate(8deg);
-    }
-}
-
-@keyframes landingHearts {
-
-    0% {
-        transform:
-            translateY(0)
-            rotate(0)
-            scale(.8);
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: .7;
-    }
-
-    85% {
-        opacity: .5;
-    }
-
-    100% {
-        transform:
-            translateY(-115vh)
-            rotate(20deg)
-            scale(1.1);
-
-        opacity: 0;
+        transition-duration:
+            .01ms !important;
     }
 }
