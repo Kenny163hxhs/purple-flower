@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Surprise</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="landing">
+  <div class="hearts" aria-hidden="true"></div>
+
+  <main class="card">
+    <div class="sparkle">✦</div>
+
+    <p class="eyebrow">A little surprise for you</p>
+
+    <h1>
+      Do you want to<br>
+      <span>proceed?</span>
+    </h1>
+
+    <p class="message">
+      Something beautiful is waiting on the other side.
+    </p>
+
+    <div class="buttons">
+      <button id="yesBtn" class="btn yes">Yes, show me ♡</button>
+      <button id="noBtn" class="btn no">Not yet</button>
+    </div>
+
+    <p id="hint" class="hint">Choose carefully...</p>
+  </main>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const hint = document.getElementById("hint");
+
+    let noClicks = 0;
+
+    const messages = [
+      "Choose carefully...",
+      "Are you sure?",
+      "The flower is waiting...",
+      "The YES button looks nicer now.",
+      "You know you want to.",
+      "Okay, I'll make YES even bigger.",
+      "There is really only one choice now ♡"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      noClicks++;
+
+      const yesScale = Math.min(1 + noClicks * 0.12, 1.8);
+      const noScale = Math.max(1 - noClicks * 0.13, 0.18);
+
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform = `scale(${noScale})`;
+      noBtn.style.opacity = Math.max(1 - noClicks * 0.12, 0.35);
+
+      hint.textContent =
+        messages[Math.min(noClicks, messages.length - 1)];
+
+      if (noClicks >= 7) {
+        noBtn.textContent = "Okay...";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.body.classList.add("leaving");
+
+      setTimeout(() => {
+        window.location.href = "flower.html";
+      }, 550);
+    });
+
+    // Floating background particles
+    const hearts = document.querySelector(".hearts");
+
+    for (let i = 0; i < 18; i++) {
+      const h = document.createElement("span");
+
+      h.textContent = Math.random() > 0.5 ? "♡" : "✦";
+      h.style.left = `${Math.random() * 100}%`;
+      h.style.animationDelay = `${Math.random() * 8}s`;
+      h.style.animationDuration = `${6 + Math.random() * 7}s`;
+      h.style.fontSize = `${10 + Math.random() * 22}px`;
+
+      hearts.appendChild(h);
+    }
+  </script>
+</body>
+</html>
